@@ -15,6 +15,7 @@
 ```tsx
 import React from 'react';
 import { Button } from 'IceCream-UI';
+import './index.less';
 
 export default () => {
   return (
@@ -28,6 +29,7 @@ export default () => {
 ```tsx
 import React from 'react';
 import { Button } from 'IceCream-UI';
+import './index.less';
 
 export default () => {
   return (
@@ -44,6 +46,7 @@ export default () => {
 ```tsx
 import React from 'react';
 import { Button } from 'IceCream-UI';
+import './index.less';
 
 export default () => {
   return (
@@ -60,6 +63,7 @@ export default () => {
 ```tsx
 import React from 'react';
 import { Button } from 'IceCream-UI';
+import './index.less';
 
 export default () => {
   return (
