@@ -33,7 +33,7 @@ import './index.less';
 
 export default () => {
   return (
-    <div>
+    <div style={{ display: 'flex', gap: '20px' }}>
       <Button>默认按钮</Button>
       <Button type="highlight">高亮按钮</Button>
     </div>
@@ -50,7 +50,7 @@ import './index.less';
 
 export default () => {
   return (
-    <div>
+    <div style={{ display: 'flex', gap: '20px' }}>
       <Button disabled>禁用按钮</Button>
       <Button type="highlight" disabled>禁用高亮按钮</Button>
     </div>
