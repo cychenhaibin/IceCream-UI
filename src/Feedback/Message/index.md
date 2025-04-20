@@ -131,10 +131,10 @@ export default () => {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| type | 消息类型 | 'success' \| 'warning' \| 'error' \| 'info' | 'info' |
-| content | 提示内容 | ReactNode | - |
-| duration | 自动关闭的延时，单位毫秒 | number | 3000 |
-| onClose | 关闭时触发的回调函数 | () => void | - |
+| type | 消息类型 | `success` \| `warning` \| `error` \| `info` | `info` |
+| content | 提示内容 | `ReactNode` | - |
+| duration | 自动关闭的延时，单位毫秒 | `number` | 3000 |
+| onClose | 关闭时触发的回调函数 | `() => void` | - |
 
 ### message 方法
 

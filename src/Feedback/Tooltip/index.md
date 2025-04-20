@@ -78,11 +78,11 @@ export default () => {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| title | 提示文字 | ReactNode | - |
-| placement | 气泡框位置 | 'top' \| 'bottom' \| 'left' \| 'right' | 'top' |
-| trigger | 触发行为 | 'hover' \| 'click' \| 'focus' | 'hover' |
-| className | 自定义类名 | string | - |
-| style | 自定义样式 | CSSProperties | - |
+| title | 提示文字 | `ReactNode` | - |
+| placement | 气泡框位置 | `top` \| `bottom` \| `left` \| `right` | `top` |
+| trigger | 触发行为 | `hover` \| `click` \| `focus` | `hover` |
+| className | 自定义类名 | `string` | - |
+| style | 自定义样式 | `CSSProperties` | - |
 
 ## 注意事项
 

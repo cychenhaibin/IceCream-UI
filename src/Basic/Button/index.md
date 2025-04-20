@@ -76,14 +76,14 @@ export default () => {
 
 ## API
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| type | 按钮类型 | 'highlight' \| 'default' | 'default' |
-| disabled | 按钮是否禁用 | boolean | false |
-| icon | 设置按钮的图标 | ReactNode | - |
-| text | 按钮文本 | string | - |
-| className | 自定义类名 | string | - |
-| style | 自定义样式 | object | - |
-| onClick | 点击按钮时的回调函数 | (event: MouseEvent) => void | - |
+| 参数 | 说明 | 类型                         | 默认值 |
+| --- | --- |----------------------------| --- |
+| type | 按钮类型 | `highlight` \| `default`    | `default` |
+| disabled | 按钮是否禁用 | `boolean`                    | `false` |
+| icon | 设置按钮的图标 | `ReactNode`                  | - |
+| text | 按钮文本 | `string`                     | - |
+| className | 自定义类名 | `string`                     | - |
+| style | 自定义样式 | `object`                     | - |
+| onClick | 点击按钮时的回调函数 | `(event: MouseEvent) => void` | - |
 
 More skills for writing demo: https://d.umijs.org/guide/basic#write-component-demo

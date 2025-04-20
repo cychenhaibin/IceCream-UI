@@ -109,19 +109,19 @@ export default () => (
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| value | 标签值 | string[] | - |
-| defaultValue | 默认标签值 | string[] | [] |
-| placeholder | 输入框占位文本 | string | '请输入' |
-| disabled | 是否禁用 | boolean | false |
-| readOnly | 是否只读 | boolean | false |
-| maxLength | 输入框最大字符数 | number | - |
-| maxTags | 最大标签数量 | number | - |
-| className | 自定义类名 | string | - |
-| style | 自定义样式 | CSSProperties | - |
-| onChange | 标签值变化时的回调 | (value: string[]) => void | - |
-| onFocus | 输入框获得焦点时的回调 | (e: FocusEvent) => void | - |
-| onBlur | 输入框失去焦点时的回调 | (e: FocusEvent) => void | - |
-| onPressEnter | 按下回车键时的回调 | (e: KeyboardEvent) => void | - |
+| value | 标签值 | `string[]` | - |
+| defaultValue | 默认标签值 | `string[]` | `[]` |
+| placeholder | 输入框占位文本 | `string` | 请输入 |
+| disabled | 是否禁用 | `boolean` | `false` |
+| readOnly | 是否只读 | `boolean` | `false` |
+| maxLength | 输入框最大字符数 | `number` | - |
+| maxTags | 最大标签数量 | `number` | - |
+| className | 自定义类名 | `string` | - |
+| style | 自定义样式 | `CSSProperties` | - |
+| onChange | 标签值变化时的回调 | `(value: string[]) => void` | - |
+| onFocus | 输入框获得焦点时的回调 | `(e: FocusEvent) => void` | - |
+| onBlur | 输入框失去焦点时的回调 | `(e: FocusEvent) => void` | - |
+| onPressEnter | 按下回车键时的回调 | `(e: KeyboardEvent) => void` | - |
 
 ## 注意事项
 

@@ -269,7 +269,7 @@ export default () => {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| type | 声明 input 类型 | `'text' \| 'password' \| 'number' \| 'email' \| 'tel' \| 'url' \| 'search'` | `'text'` |
+| type | 声明 input 类型 | `text` \| `password` \| `number` \| `email` \| `tel` \| `url` \| `search` | `text` |
 | value | 输入框内容 | `string` | - |
 | defaultValue | 输入框默认内容 | `string` | - |
 | placeholder | 输入框提示文本 | `string` | - |
