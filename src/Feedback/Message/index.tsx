@@ -1,7 +1,7 @@
 import React, { ReactNode, useContext, useEffect, useState } from 'react';
 import './index.less';
 import cs from 'classnames';
-import { ConfigContext } from '../ConfigProvider';
+import { ConfigContext } from '../../ConfigProvider';
 
 interface MessageProps {
   type?: 'success' | 'warning' | 'error' | 'info';

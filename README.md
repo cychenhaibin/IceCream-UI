@@ -41,12 +41,12 @@ const App = () => {
 
 ### 基础组件
 
-- [Button 按钮](./src/Button/index.md) - 按钮组件，支持多种类型和状态
-- [Message 消息提示](./src/Message/index.md) - 全局展示操作反馈信息
+- [Button 按钮](src/Basic/Button/index.md) - 按钮组件，支持多种类型和状态
+- [Message 消息提示](src/Feedback/Message/index.md) - 全局展示操作反馈信息
 
 ### 反馈组件
 
-- [Message 消息提示](./src/Message/index.md) - 全局展示操作反馈信息
+- [Message 消息提示](src/Feedback/Message/index.md) - 全局展示操作反馈信息
 
 ## 🛠 开发
 

@@ -1,10 +1,4 @@
----
-title: Input 输入框
-navigation:
-  title: Input
-  group: 数据录入
----
-# Input
+# Input 输入框
 
 [//]: # (## Input 输入框)
 
@@ -18,6 +12,8 @@ navigation:
 ## 代码演示
 ### 基本使用
 
+最简单的用法，展示了一个基本的输入框。
+
 ```tsx
 import React from 'react';
 import { Input } from 'IceCream-UI';
@@ -25,7 +21,7 @@ import { Input } from 'IceCream-UI';
 export default () => {
   return (
     <div className="ice-input-demo">
-      <Input placeholder="请输入内容" />
+      <Input style={{ width: '300px' }} placeholder="请输入内容" />
     </div>
   );
 };
@@ -33,6 +29,8 @@ export default () => {
 
 ### 不同大小
 
+输入框定义了三种尺寸（大、默认、小），高度分别为 40px、32px 和 24px。
+
 ```tsx
 import React from 'react';
 import { Input } from 'IceCream-UI';
@@ -40,9 +38,9 @@ import { Input } from 'IceCream-UI';
 export default () => {
   return (
     <div className="ice-input-demo">
-      <Input size="small" placeholder="小尺寸" />
-      <Input placeholder="默认尺寸" />
-      <Input size="large" placeholder="大尺寸" />
+      <Input style={{ width: '300px' }} size="small" placeholder="小尺寸" />
+      <Input style={{ width: '300px' }} placeholder="默认尺寸" />
+      <Input style={{ width: '300px' }} size="large" placeholder="大尺寸" />
     </div>
   );
 };
@@ -50,6 +48,8 @@ export default () => {
 
 ### 前置/后置标签
 
+在输入框上添加前缀或后缀图标，可以用于展示输入框的用途或单位。
+
 ```tsx
 import React from 'react';
 import { Input } from 'IceCream-UI';
@@ -57,15 +57,17 @@ import { Input } from 'IceCream-UI';
 export default () => {
   return (
     <div className="ice-input-demo">
-      <Input prefix="￥" suffix="RMB" placeholder="请输入金额" />
-      <Input prefix="🔍" placeholder="搜索" />
-      <Input suffix=".com" placeholder="请输入网址" />
+      <Input style={{ width: '300px' }} prefix="￥" suffix="RMB" placeholder="请输入金额" />
+      <Input style={{ width: '300px' }} prefix="🔍" placeholder="搜索" />
+      <Input style={{ width: '300px' }} suffix=".com" placeholder="请输入网址" />
     </div>
   );
 };
 ```
 
 ### 搜索框
+
+带有搜索按钮的输入框，点击搜索按钮会触发 `onSearch` 回调。
 
 ```tsx
 import React from 'react';
@@ -78,7 +80,7 @@ export default () => {
 
   return (
     <div className="ice-input-demo">
-      <Input type="search" placeholder="搜索..." onSearch={handleSearch} />
+      <Input style={{ width: '300px' }} type="search" placeholder="搜索..." onSearch={handleSearch} />
     </div>
   );
 };
@@ -86,6 +88,8 @@ export default () => {
 
 ### 密码框
 
+密码框，可以切换密码的显示和隐藏。
+
 ```tsx
 import React from 'react';
 import { Input } from 'IceCream-UI';
@@ -93,7 +97,7 @@ import { Input } from 'IceCream-UI';
 export default () => {
   return (
     <div className="ice-input-demo">
-      <Input type="password" placeholder="请输入密码" />
+      <Input style={{ width: '300px' }} type="password" placeholder="请输入密码" />
     </div>
   );
 };
@@ -101,6 +105,8 @@ export default () => {
 
 ### 数字输入框
 
+数字输入框，只允许输入数字，可以设置最大值和最小值。
+
 ```tsx
 import React from 'react';
 import { Input } from 'IceCream-UI';
@@ -108,7 +114,7 @@ import { Input } from 'IceCream-UI';
 export default () => {
   return (
     <div className="ice-input-demo">
-      <Input type="number" placeholder="请输入数字" />
+      <Input style={{ width: '300px' }} type="number" placeholder="请输入数字" />
     </div>
   );
 };
@@ -116,6 +122,8 @@ export default () => {
 
 ### 邮箱输入框
 
+邮箱输入框，会自动验证输入内容是否符合邮箱格式。
+
 ```tsx
 import React from 'react';
 import { Input } from 'IceCream-UI';
@@ -123,7 +131,7 @@ import { Input } from 'IceCream-UI';
 export default () => {
   return (
     <div className="ice-input-demo">
-      <Input type="email" placeholder="请输入邮箱" />
+      <Input style={{ width: '300px' }} type="email" placeholder="请输入邮箱" />
     </div>
   );
 };
@@ -131,6 +139,8 @@ export default () => {
 
 ### 网址输入框
 
+网址输入框，会自动验证输入内容是否符合 URL 格式。
+
 ```tsx
 import React from 'react';
 import { Input } from 'IceCream-UI';
@@ -138,7 +148,7 @@ import { Input } from 'IceCream-UI';
 export default () => {
   return (
     <div className="ice-input-demo">
-      <Input type="url" placeholder="请输入网址" />
+      <Input style={{ width: '300px' }} type="url" placeholder="请输入网址" />
     </div>
   );
 };
@@ -146,6 +156,8 @@ export default () => {
 
 ### 电话输入框
 
+电话输入框，会自动过滤非数字字符，保持纯数字格式。
+
 ```tsx
 import React from 'react';
 import { Input } from 'IceCream-UI';
@@ -153,7 +165,7 @@ import { Input } from 'IceCream-UI';
 export default () => {
   return (
     <div className="ice-input-demo">
-      <Input type="tel" placeholder="请输入电话号码" />
+      <Input style={{ width: '300px' }} type="tel" placeholder="请输入电话号码" />
     </div>
   );
 };
@@ -161,6 +173,8 @@ export default () => {
 
 ### 禁用状态
 
+禁用状态的输入框，不可输入，显示为灰色。
+
 ```tsx
 import React from 'react';
 import { Input } from 'IceCream-UI';
@@ -168,7 +182,7 @@ import { Input } from 'IceCream-UI';
 export default () => {
   return (
     <div className="ice-input-demo">
-      <Input disabled placeholder="禁用状态" />
+      <Input style={{ width: '300px' }} disabled placeholder="禁用状态" />
     </div>
   );
 };
@@ -176,6 +190,8 @@ export default () => {
 
 ### 只读状态
 
+只读状态的输入框，不可输入，但可以复制内容。
+
 ```tsx
 import React from 'react';
 import { Input } from 'IceCream-UI';
@@ -183,7 +199,7 @@ import { Input } from 'IceCream-UI';
 export default () => {
   return (
     <div className="ice-input-demo">
-      <Input readOnly value="只读内容" />
+      <Input style={{ width: '300px' }} readOnly value="只读内容" />
     </div>
   );
 };
@@ -191,6 +207,8 @@ export default () => {
 
 ### 带清除按钮
 
+带清除按钮的输入框，点击清除按钮可以清空输入内容。
+
 ```tsx
 import React from 'react';
 import { Input } from 'IceCream-UI';
@@ -198,7 +216,7 @@ import { Input } from 'IceCream-UI';
 export default () => {
   return (
     <div className="ice-input-demo">
-      <Input allowClear placeholder="请输入内容" />
+      <Input style={{ width: '300px' }} allowClear placeholder="请输入内容" />
     </div>
   );
 };
@@ -206,6 +224,8 @@ export default () => {
 
 ### 自动聚焦
 
+自动聚焦的输入框，页面加载完成后自动获得焦点。
+
 ```tsx
 import React from 'react';
 import { Input } from 'IceCream-UI';
@@ -213,7 +233,33 @@ import { Input } from 'IceCream-UI';
 export default () => {
   return (
     <div className="ice-input-demo">
-      <Input autoFocus placeholder="自动聚焦" />
+      <Input style={{ width: '300px' }} autoFocus placeholder="自动聚焦" />
+    </div>
+  );
+};
+```
+
+### 自定义宽度
+
+Input 组件支持通过 `style` 或 `className` 自定义宽度。
+
+```tsx
+import React from 'react';
+import { Input } from 'IceCream-UI';
+
+export default () => {
+  return (
+    <div className="ice-input-demo">
+      {/* 通过 style 设置固定宽度 */}
+      <Input style={{ width: '300px' }} placeholder="固定宽度 300px" />
+      
+      {/* 通过 style 设置百分比宽度 */}
+      <div style={{ width: '50%' }}>
+        <Input placeholder="父容器宽度 50%" />
+      </div>
+      
+      {/* 通过 className 设置宽度 */}
+      <Input className="custom-width" placeholder="自定义类名设置宽度" />
     </div>
   );
 };
@@ -242,4 +288,4 @@ export default () => {
 | onFocus | 输入框获得焦点时的回调 | `(e: React.FocusEvent<HTMLInputElement>) => void` | - |
 | onBlur | 输入框失去焦点时的回调 | `(e: React.FocusEvent<HTMLInputElement>) => void` | - |
 | onPressEnter | 按下回车的回调 | `(e: React.KeyboardEvent<HTMLInputElement>) => void` | - |
-| onSearch | 点击搜索按钮的回调 | `(value: string) => void` | - | 
+| onSearch | 点击搜索按钮的回调 | `(value: string) => void` | - |

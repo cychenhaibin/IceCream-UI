@@ -1,7 +1,7 @@
 import React, {ReactNode, useContext} from 'react';
 import './index.less'
 import cs from 'classnames'
-import {ConfigContext} from "../ConfigProvider";
+import {ConfigContext} from "../../ConfigProvider";
 
 interface ButtonProps {
   type?: 'highlight' | 'default',
