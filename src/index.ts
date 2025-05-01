@@ -4,4 +4,6 @@ export { default as message } from './Feedback/Message/message';
 export { default as Input } from './Form/Input';
 export { default as Tooltip } from './Feedback/Tooltip';
 export { default as InputTag } from './Form/InputTag';
+export { default as Rate } from './Form/Rate';
+export { default as Dialog } from './Feedback/Dialog';
 

@@ -5,3 +5,5 @@
 2025.4.20 @cychenhaibin feat：Tooltip组件
 
 2025.4.20 @cychenhaibin feat：InputTag组件
+
+2025.5.1 @cychenhaibin feat：Rate组件、Dialog组件
