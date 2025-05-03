@@ -6,4 +6,5 @@ export { default as Tooltip } from './Feedback/Tooltip';
 export { default as InputTag } from './Form/InputTag';
 export { default as Rate } from './Form/Rate';
 export { default as Dialog } from './Feedback/Dialog';
-
+export { default as Form } from './Form/Form';
+export { default as Tree } from './Data/Tree';

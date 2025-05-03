@@ -1,0 +1,52 @@
+.ice-tree {
+  color: #333;
+  font-size: 14px;
+  user-select: none;
+}
+.ice-tree-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 2px 0 2px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.ice-tree-node.selected {
+  color: #1890ff;
+  background: #e6f7ff;
+}
+.ice-tree-node.checked {
+  font-weight: 600;
+}
+.ice-tree-node.disabled {
+  color: #bbb;
+  cursor: not-allowed;
+}
+.ice-tree-node.drag-over {
+  background: #f0f0f0;
+  border-left: 3px solid #1890ff;
+}
+.ice-tree-switcher {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+.ice-tree-title {
+  padding: 2px 4px;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+.ice-tree-title.selectable:hover {
+  background: #f5f5f5;
+}
+.ice-tree-children {
+  margin-left: 16px;
+  border-left: 1px dashed #eee;
+}
+.ice-tree-loading {
+  color: #faad14;
+  font-size: 12px;
+}
