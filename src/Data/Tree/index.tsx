@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import classNames from 'classnames';
+import Icon from '../../General/Icon';
 import './index.less';
 
 export interface TreeNode {
@@ -6,216 +8,451 @@ export interface TreeNode {
   title: React.ReactNode;
   children?: TreeNode[];
   isLeaf?: boolean;
-  checkable?: boolean;
   disabled?: boolean;
-  [key: string]: any;
+  checkable?: boolean;
+  selectable?: boolean;
+  expanded?: boolean;
+  selected?: boolean;
+  checked?: boolean;
+  loading?: boolean;
 }
 
-interface TreeProps {
+export interface TreeProps {
   data: TreeNode[];
+  defaultExpandedKeys?: string[];
+  defaultSelectedKeys?: string[];
+  defaultCheckedKeys?: string[];
+  expandedKeys?: string[];
+  selectedKeys?: string[];
+  checkedKeys?: string[];
   checkable?: boolean;
   selectable?: boolean;
   multiple?: boolean;
-  defaultExpandedKeys?: string[];
-  defaultCheckedKeys?: string[];
-  defaultSelectedKeys?: string[];
-  loadData?: (node: TreeNode) => Promise<TreeNode[]>;
-  onSelect?: (selectedKeys: string[], info: any) => void;
-  onCheck?: (checkedKeys: string[], info: any) => void;
-  filterTreeNode?: (node: TreeNode) => boolean;
   accordion?: boolean;
   draggable?: boolean;
+  showLine?: boolean;
+  loadData?: (node: TreeNode) => Promise<void>;
+  onExpand?: (expandedKeys: string[], info: { node: TreeNode; expanded: boolean }) => void;
+  onSelect?: (selectedKeys: string[], info: { node: TreeNode; selected: boolean }) => void;
+  onCheck?: (checkedKeys: string[], info: { node: TreeNode; checked: boolean }) => void;
+  onDragStart?: (node: TreeNode, e: React.DragEvent) => void;
+  onDragEnter?: (dragNode: TreeNode, dropNode: TreeNode, e: React.DragEvent) => void;
+  onDragLeave?: (dragNode: TreeNode, dropNode: TreeNode, e: React.DragEvent) => void;
+  onDragOver?: (dragNode: TreeNode, dropNode: TreeNode, e: React.DragEvent) => void;
+  onDragEnd?: (dragNode: TreeNode, dropNode: TreeNode | null, dropType: 'before' | 'after' | 'inner', e: React.DragEvent) => void;
+  onDrop?: (dragNode: TreeNode, dropNode: TreeNode, dropType: 'before' | 'after' | 'inner', e: React.DragEvent) => void;
+  allowDrop?: (dragNode: TreeNode, dropNode: TreeNode, dropType: 'before' | 'after' | 'inner') => boolean;
+  allowDrag?: (node: TreeNode) => boolean;
+  filterValue?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const Tree: React.FC<TreeProps> = ({
   data,
+  defaultExpandedKeys = [],
+  defaultSelectedKeys = [],
+  defaultCheckedKeys = [],
+  expandedKeys,
+  selectedKeys,
+  checkedKeys,
   checkable = false,
   selectable = true,
   multiple = false,
-  defaultExpandedKeys = [],
-  defaultCheckedKeys = [],
-  defaultSelectedKeys = [],
-  loadData,
-  onSelect,
-  onCheck,
-  filterTreeNode,
   accordion = false,
   draggable = false,
+  showLine = false,
+  loadData,
+  onExpand,
+  onSelect,
+  onCheck,
+  onDragStart,
+  onDragEnter,
+  onDragLeave,
+  onDragOver,
+  onDragEnd,
+  onDrop,
+  allowDrop,
+  allowDrag,
+  filterValue,
+  className,
+  style,
 }) => {
-  const [expandedKeys, setExpandedKeys] = useState<string[]>(defaultExpandedKeys);
-  const [checkedKeys, setCheckedKeys] = useState<string[]>(defaultCheckedKeys);
-  const [selectedKeys, setSelectedKeys] = useState<string[]>(defaultSelectedKeys);
+  const [internalExpandedKeys, setInternalExpandedKeys] = useState<string[]>(defaultExpandedKeys);
+  const [internalSelectedKeys, setInternalSelectedKeys] = useState<string[]>(defaultSelectedKeys);
+  const [internalCheckedKeys, setInternalCheckedKeys] = useState<string[]>(defaultCheckedKeys);
   const [loadingKeys, setLoadingKeys] = useState<string[]>([]);
+  const [dragOverNode, setDragOverNode] = useState<TreeNode | null>(null);
+  const [dropPosition, setDropPosition] = useState<number>(0);
   const [treeData, setTreeData] = useState<TreeNode[]>(data);
-  const [dragOverKey, setDragOverKey] = useState<string | null>(null);
+  const dragNode = useRef<TreeNode | null>(null);
 
   useEffect(() => {
     setTreeData(data);
   }, [data]);
 
-  // 展开/收起节点
-  const handleExpand = async (node: TreeNode) => {
-    if (expandedKeys.includes(node.key)) {
-      setExpandedKeys(expandedKeys.filter((k) => k !== node.key));
+  const handleExpand = useCallback((node: TreeNode) => {
+    if (node.disabled) return;
+
+    const key = node.key;
+    const isExpanded = internalExpandedKeys.includes(key);
+    let newExpandedKeys: string[];
+
+    if (accordion) {
+      newExpandedKeys = isExpanded ? [] : [key];
     } else {
-      // 懒加载
-      if (loadData && !node.isLeaf && (!node.children || node.children.length === 0)) {
-        setLoadingKeys((keys) => [...keys, node.key]);
-        try {
-          const children = await loadData(node);
-          setTreeData(updateNode(treeData, node.key, { children }));
-        } catch {
-          // 懒加载失败，保持节点状态，允许重试
-        } finally {
-          setLoadingKeys((keys) => keys.filter((k) => k !== node.key));
+      newExpandedKeys = isExpanded
+        ? internalExpandedKeys.filter(k => k !== key)
+        : [...internalExpandedKeys, key];
+    }
+
+    setInternalExpandedKeys(newExpandedKeys);
+    onExpand?.(newExpandedKeys, { node, expanded: !isExpanded });
+
+    if (loadData && !node.children && !node.isLeaf) {
+      setLoadingKeys(prev => [...prev, key]);
+      loadData(node)
+        .then(() => {
+          setLoadingKeys(prev => prev.filter(k => k !== key));
+        })
+        .catch(() => {
+          setLoadingKeys(prev => prev.filter(k => k !== key));
+        });
+    }
+  }, [internalExpandedKeys, accordion, loadData, onExpand]);
+
+  const handleSelect = useCallback((node: TreeNode) => {
+    if (!selectable || node.disabled) return;
+
+    const key = node.key;
+    const isSelected = internalSelectedKeys.includes(key);
+    let newSelectedKeys: string[];
+
+    if (multiple) {
+      newSelectedKeys = isSelected
+        ? internalSelectedKeys.filter(k => k !== key)
+        : [...internalSelectedKeys, key];
+    } else {
+      newSelectedKeys = isSelected ? [] : [key];
+    }
+
+    setInternalSelectedKeys(newSelectedKeys);
+    onSelect?.(newSelectedKeys, { node, selected: !isSelected });
+  }, [internalSelectedKeys, multiple, selectable, onSelect]);
+
+  const handleCheck = useCallback((node: TreeNode) => {
+    if (!checkable || node.disabled) return;
+
+    const key = node.key;
+    const isChecked = internalCheckedKeys.includes(key);
+    let newCheckedKeys: string[];
+
+    if (multiple) {
+      newCheckedKeys = isChecked
+        ? internalCheckedKeys.filter(k => k !== key)
+        : [...internalCheckedKeys, key];
+    } else {
+      newCheckedKeys = isChecked ? [] : [key];
+    }
+
+    setInternalCheckedKeys(newCheckedKeys);
+    onCheck?.(newCheckedKeys, { node, checked: !isChecked });
+  }, [internalCheckedKeys, checkable, multiple, onCheck]);
+
+  const findNode = useCallback((key: string, nodes: TreeNode[]): { node: TreeNode; parent: TreeNode | null; index: number } | null => {
+    for (let i = 0; i < nodes.length; i++) {
+      const node = nodes[i];
+      if (node.key === key) {
+        return { node, parent: null, index: i };
+      }
+      if (node.children) {
+        const result = findNode(key, node.children);
+        if (result) {
+          return { ...result, parent: node };
         }
       }
-      // 手风琴模式
-      if (accordion) {
-        setExpandedKeys([node.key]);
-      } else {
-        setExpandedKeys([...expandedKeys, node.key]);
-      }
     }
-  };
+    return null;
+  }, []);
 
-  // 选择节点
-  const handleSelect = (node: TreeNode) => {
-    if (!selectable || node.disabled) return;
-    let newSelected: string[];
-    if (multiple) {
-      if (selectedKeys.includes(node.key)) {
-        newSelected = selectedKeys.filter((k) => k !== node.key);
-      } else {
-        newSelected = [...selectedKeys, node.key];
-      }
-    } else {
-      newSelected = [node.key];
-    }
-    setSelectedKeys(newSelected);
-    onSelect && onSelect(newSelected, { node });
-  };
-
-  // 复选框
-  const handleCheck = (node: TreeNode) => {
-    if (node.disabled || node.checkable === false) return;
-    let newChecked: string[];
-    if (checkedKeys.includes(node.key)) {
-      newChecked = checkedKeys.filter((k) => k !== node.key);
-    } else {
-      newChecked = [...checkedKeys, node.key];
-    }
-    setCheckedKeys(newChecked);
-    onCheck && onCheck(newChecked, { node });
-  };
-
-  // 拖拽
-  const handleDragStart = (e: React.DragEvent, node: TreeNode) => {
-    e.dataTransfer.setData('dragKey', node.key);
-  };
-  const handleDragOver = (e: React.DragEvent, node: TreeNode) => {
-    e.preventDefault();
-    setDragOverKey(node.key);
-  };
-  const handleDrop = (e: React.DragEvent, node: TreeNode) => {
-    e.preventDefault();
-    const dragKey = e.dataTransfer.getData('dragKey');
-    if (dragKey && dragKey !== node.key) {
-      setTreeData(moveNode(treeData, dragKey, node.key));
-    }
-    setDragOverKey(null);
-  };
-
-  // 递归渲染树节点
-  const renderTree = (nodes: TreeNode[]) => {
-    return nodes.map((node) => {
-      // 过滤
-      if (filterTreeNode && !filterTreeNode(node)) return null;
-      const expanded = expandedKeys.includes(node.key);
-      const checked = checkedKeys.includes(node.key);
-      const selected = selectedKeys.includes(node.key);
-      const loading = loadingKeys.includes(node.key);
-      const isLeaf = node.isLeaf || (node.children && node.children.length === 0);
-      return (
-        <div
-          key={node.key}
-          className={`ice-tree-node${expanded ? ' expanded' : ''}${selected ? ' selected' : ''}${
-            checked ? ' checked' : ''
-          }${node.disabled ? ' disabled' : ''}${dragOverKey === node.key ? ' drag-over' : ''}`}
-          draggable={draggable && !node.disabled}
-          onDragStart={draggable ? (e) => handleDragStart(e, node) : undefined}
-          onDragOver={draggable ? (e) => handleDragOver(e, node) : undefined}
-          onDrop={draggable ? (e) => handleDrop(e, node) : undefined}
-        >
-          <span
-            className="ice-tree-switcher"
-            onClick={() => !isLeaf && !loading && handleExpand(node)}
-          >
-            {loading ? (
-              <span className="ice-tree-loading">⏳</span>
-            ) : isLeaf ? null : (
-              <span>{expanded ? '▼' : '▶'}</span>
-            )}
-          </span>
-          {checkable && node.checkable !== false && (
-            <input
-              type="checkbox"
-              checked={checked}
-              disabled={node.disabled}
-              onChange={() => handleCheck(node)}
-            />
-          )}
-          <span
-            className={`ice-tree-title${selectable && !node.disabled ? ' selectable' : ''}`}
-            onClick={() => handleSelect(node)}
-          >
-            {node.title}
-          </span>
-          {expanded && node.children && node.children.length > 0 && (
-            <div className="ice-tree-children">{renderTree(node.children)}</div>
-          )}
-        </div>
-      );
-    });
-  };
-
-  return <div className="ice-tree">{renderTree(treeData)}</div>;
-};
-
-// 工具函数：更新节点
-function updateNode(tree: TreeNode[], key: string, patch: Partial<TreeNode>): TreeNode[] {
-  return tree.map((node) => {
-    if (node.key === key) return { ...node, ...patch };
-    if (node.children) return { ...node, children: updateNode(node.children, key, patch) };
-    return node;
-  });
-}
-// 工具函数：拖拽移动节点
-function moveNode(tree: TreeNode[], dragKey: string, dropKey: string): TreeNode[] {
-  let dragNode: TreeNode | null = null;
-  function removeNode(nodes: TreeNode[]): TreeNode[] {
-    return nodes.filter((node) => {
-      if (node.key === dragKey) {
-        dragNode = node;
+  const removeNode = useCallback((key: string, nodes: TreeNode[]): TreeNode[] => {
+    return nodes.filter(node => {
+      if (node.key === key) {
         return false;
       }
-      if (node.children) node.children = removeNode(node.children);
+      if (node.children) {
+        node.children = removeNode(key, node.children);
+      }
       return true;
     });
-  }
-  const newTree = removeNode([...tree]);
-  function insertNode(nodes: TreeNode[]): boolean {
-    for (let node of nodes) {
-      if (node.key === dropKey && dragNode) {
-        node.children = node.children ? [...node.children, dragNode] : [dragNode];
-        return true;
+  }, []);
+
+  const insertNode = useCallback((targetNode: TreeNode, dragNode: TreeNode, position: number, nodes: TreeNode[]): TreeNode[] => {
+    // 检查是否是根节点之间的排序
+    const isRootLevel = nodes.some(node => node.key === targetNode.key);
+
+    if (isRootLevel) {
+      const targetIndex = nodes.findIndex(node => node.key === targetNode.key);
+      if (targetIndex === -1) return nodes;
+
+      const newNodes = [...nodes];
+      const dragIndex = newNodes.findIndex(node => node.key === dragNode.key);
+
+      if (dragIndex !== -1) {
+        newNodes.splice(dragIndex, 1);
       }
-      if (node.children && insertNode(node.children)) return true;
+
+      if (position === -1) {
+        newNodes.splice(targetIndex, 0, dragNode);
+      } else {
+        newNodes.splice(targetIndex + 1, 0, dragNode);
+      }
+
+      return newNodes;
     }
-    return false;
-  }
-  insertNode(newTree);
-  return newTree;
-}
+
+    // 处理子节点排序
+    return nodes.map(node => {
+      if (node.children) {
+        const children = [...node.children];
+        const targetIndex = children.findIndex(child => child.key === targetNode.key);
+        const dragIndex = children.findIndex(child => child.key === dragNode.key);
+
+        // 如果目标节点在当前节点的子节点中
+        if (targetIndex !== -1) {
+          // 如果拖拽节点也在当前节点的子节点中
+          if (dragIndex !== -1) {
+            children.splice(dragIndex, 1);
+          }
+
+          if (position === -1) {
+            children.splice(targetIndex, 0, dragNode);
+          } else {
+            children.splice(targetIndex + 1, 0, dragNode);
+          }
+
+          return { ...node, children };
+        }
+
+        // 如果拖拽节点在当前节点的子节点中，但目标节点不在
+        if (dragIndex !== -1) {
+          children.splice(dragIndex, 1);
+          return { ...node, children };
+        }
+
+        // 递归处理子节点
+        const updatedChildren = insertNode(targetNode, dragNode, position, node.children);
+        if (updatedChildren !== node.children) {
+          return { ...node, children: updatedChildren };
+        }
+      }
+
+      return node;
+    });
+  }, []);
+
+  const handleDragStart = useCallback((e: React.DragEvent, node: TreeNode) => {
+    if (!draggable || (allowDrag && !allowDrag(node))) return;
+    dragNode.current = node;
+    setDragOverNode(null);
+    onDragStart?.(node, e);
+  }, [draggable, allowDrag, onDragStart]);
+
+  const handleDragEnter = useCallback((e: React.DragEvent, node: TreeNode) => {
+    if (!draggable || !dragNode.current) return;
+    onDragEnter?.(dragNode.current, node, e);
+  }, [draggable, onDragEnter]);
+
+  const handleDragLeave = useCallback((e: React.DragEvent, node: TreeNode) => {
+    if (!draggable || !dragNode.current) return;
+    onDragLeave?.(dragNode.current, node, e);
+  }, [draggable, onDragLeave]);
+
+  const handleDragOver = useCallback((e: React.DragEvent, node: TreeNode) => {
+    if (!draggable || !dragNode.current) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const dragNodeKey = dragNode.current.key;
+    const dropNodeKey = node.key;
+
+    // 不允许拖拽到自身或其子节点
+    if (dragNodeKey === dropNodeKey) return;
+
+    const isChild = (parentKey: string, childKey: string, nodes: TreeNode[]): boolean => {
+      const node = findNode(parentKey, nodes);
+      if (!node) return false;
+      if (node.node.children) {
+        return node.node.children.some(child => child.key === childKey) ||
+          node.node.children.some(child => isChild(child.key, childKey, nodes));
+      }
+      return false;
+    };
+
+    if (isChild(dragNodeKey, dropNodeKey, treeData)) return;
+
+    setDragOverNode(node);
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const offsetY = e.clientY - rect.top;
+    const height = rect.height;
+    const position = offsetY < height / 3 ? -1 : offsetY > (height * 2) / 3 ? 1 : 0;
+    setDropPosition(position);
+
+    onDragOver?.(dragNode.current, node, e);
+  }, [draggable, dragNode, treeData, findNode, onDragOver]);
+
+  const handleDragEnd = useCallback((e: React.DragEvent, node: TreeNode) => {
+    if (!draggable) return;
+    const dropType = dropPosition === -1 ? 'before' : dropPosition === 1 ? 'after' : 'inner';
+    onDragEnd?.(node, dragOverNode, dropType, e);
+    dragNode.current = null;
+    setDragOverNode(null);
+  }, [draggable, dropPosition, dragOverNode, onDragEnd]);
+
+  const handleDrop = useCallback((e: React.DragEvent, node: TreeNode) => {
+    if (!draggable || !dragNode.current) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const dropType = dropPosition === -1 ? 'before' : dropPosition === 1 ? 'after' : 'inner';
+
+    if (allowDrop && !allowDrop(dragNode.current, node, dropType)) {
+      return;
+    }
+
+    // 查找拖拽节点
+    const dragNodeInfo = findNode(dragNode.current.key, treeData);
+    if (!dragNodeInfo) return;
+
+    // 从原位置移除节点
+    const newTreeData = removeNode(dragNode.current.key, treeData);
+
+    // 在新位置插入节点
+    const updatedTreeData = insertNode(node, dragNode.current, dropPosition, newTreeData);
+
+    // 如果插入失败，恢复原数据
+    if (JSON.stringify(updatedTreeData) === JSON.stringify(newTreeData)) {
+      setTreeData(treeData);
+      return;
+    }
+
+    setTreeData(updatedTreeData);
+    onDrop?.(dragNode.current, node, dropType, e);
+  }, [treeData, findNode, removeNode, insertNode, draggable, dropPosition, allowDrop, onDrop]);
+
+  const renderTreeNode = (node: TreeNode, level: number = 0) => {
+    const {
+      key,
+      title,
+      children,
+      isLeaf,
+      disabled,
+      checkable: nodeCheckable,
+      selectable: nodeSelectable,
+      expanded,
+      selected,
+      checked,
+      loading,
+    } = node;
+
+    const isExpanded = expandedKeys ? expandedKeys.includes(key) : internalExpandedKeys.includes(key);
+    const isSelected = selectedKeys ? selectedKeys.includes(key) : internalSelectedKeys.includes(key);
+    const isChecked = checkedKeys ? checkedKeys.includes(key) : internalCheckedKeys.includes(key);
+    const isLoading = loadingKeys.includes(key);
+    const isDragOver = dragOverNode?.key === key;
+
+    const hasChildren = children && children.length > 0;
+    const showExpandIcon = !isLeaf && (hasChildren || loadData);
+
+    const nodeClasses = classNames('ice-tree-node', {
+      'ice-tree-node-expanded': isExpanded,
+      'ice-tree-node-selected': isSelected,
+      'ice-tree-node-checked': isChecked,
+      'ice-tree-node-disabled': disabled,
+      'ice-tree-node-loading': isLoading,
+      'ice-tree-node-drag-over': isDragOver,
+      'ice-tree-node-drag-over-top': isDragOver && dropPosition === -1,
+      'ice-tree-node-drag-over-bottom': isDragOver && dropPosition === 1,
+    });
+
+    const checkboxClasses = classNames('ice-tree-checkbox', {
+      'ice-tree-checkbox-checked': isChecked,
+      'ice-tree-checkbox-disabled': disabled,
+    });
+
+    const handleNodeClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (disabled) return;
+      handleSelect(node);
+    };
+
+    const handleCheckboxClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (disabled) return;
+      handleCheck(node);
+    };
+
+    return (
+      <div
+        key={key}
+        className={nodeClasses}
+        draggable={draggable && !disabled && (!allowDrag || allowDrag(node))}
+        onDragStart={(e) => handleDragStart(e, node)}
+        onDragEnd={(e) => handleDragEnd(e, node)}
+        onDragEnter={(e) => handleDragEnter(e, node)}
+        onDragLeave={(e) => handleDragLeave(e, node)}
+        onDragOver={(e) => handleDragOver(e, node)}
+        onDrop={(e) => handleDrop(e, node)}
+      >
+        <span className="ice-tree-node-indent">
+          {showExpandIcon && (
+            <span
+              className="ice-tree-switcher"
+              onClick={() => !disabled && handleExpand(node)}
+            >
+              <Icon type={isExpanded ? 'down' : 'right'} />
+            </span>
+          )}
+        </span>
+        {checkable && nodeCheckable !== false && (
+          <span
+            className={checkboxClasses}
+            onClick={handleCheckboxClick}
+          >
+            {isChecked && <Icon type="check-square" />}
+          </span>
+        )}
+        <span
+          className="ice-tree-node-content"
+          onClick={handleNodeClick}
+        >
+          {title}
+        </span>
+        {isLoading && <Icon type="loading" className="ice-tree-loading-icon" />}
+        {isExpanded && hasChildren && (
+          <div className="ice-tree-child-nodes">
+            {children.map(child => renderTreeNode(child, level + 1))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const filteredData = filterValue
+    ? treeData.filter(node => {
+        const title = node.title?.toString().toLowerCase() || '';
+        return title.includes(filterValue.toLowerCase());
+      })
+    : treeData;
+
+  return (
+    <div className={classNames('ice-tree', className)} style={style}>
+      {filteredData.map(node => renderTreeNode(node))}
+    </div>
+  );
+};
 
 export default Tree;
