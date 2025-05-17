@@ -35,7 +35,7 @@ jobs:
       - name: Build Project
         run: |
           npm install
-          npm run build
+          npm run docs:build
 
       # 部署到github
       - name: Deploy to Github
@@ -43,5 +43,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           branch: build # 打包的内容放到build分支下
-          folder: dist
+          folder: docs-dist
           clean: true
