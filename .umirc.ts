@@ -6,7 +6,7 @@ export default defineConfig({
   favicon:
     'https://gw.alipayobjects.com/zos/bmw-prod/d3e3eb39-1cd7-4aa5-827c-877deced6b7e/lalxt4g3_w256_h256.png',
   logo: 'https://gw.alipayobjects.com/zos/bmw-prod/d3e3eb39-1cd7-4aa5-827c-877deced6b7e/lalxt4g3_w256_h256.png',
-  outputPath: 'docs-dist',
+  // outputPath: 'docs-dist',
 
   devServer: {
     port: 1998, // 自定义端口号
