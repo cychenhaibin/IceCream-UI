@@ -52,9 +52,23 @@ const Dialog: React.FC<DialogProps> = ({
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const dialogRef = useRef<HTMLDivElement>(null);
   const dragStartPos = useRef({ x: 0, y: 0 });
+  const [zIndex, setZIndex] = useState(1000);
 
   useEffect(() => {
     setInternalVisible(visible);
+  }, [visible]);
+
+  useEffect(() => {
+    if (visible) {
+      // Get the highest z-index from existing dialogs
+      const dialogs = document.querySelectorAll('.ice-dialog-root');
+      let maxZIndex = 1000;
+      dialogs.forEach((dialog) => {
+        const zIndex = parseInt(window.getComputedStyle(dialog).zIndex || '1000', 10);
+        maxZIndex = Math.max(maxZIndex, zIndex);
+      });
+      setZIndex(maxZIndex + 1);
+    }
   }, [visible]);
 
   useEffect(() => {
@@ -129,6 +143,7 @@ const Dialog: React.FC<DialogProps> = ({
 
     const dialogStyle: React.CSSProperties = {
       width: fullscreen ? '100%' : width,
+      zIndex: zIndex + 1,
       ...style,
     };
 
@@ -151,7 +166,7 @@ const Dialog: React.FC<DialogProps> = ({
     }
 
     const dialogClass = classNames('ice-dialog', {
-      'visible': internalVisible,
+      visible: internalVisible,
       'ice-dialog-centered': centered && !fullscreen && !draggable,
       'ice-dialog-fullscreen': fullscreen,
       'ice-dialog-draggable': draggable,
@@ -159,32 +174,24 @@ const Dialog: React.FC<DialogProps> = ({
     });
 
     const maskClass = classNames('ice-dialog-mask', {
-      'visible': internalVisible,
+      visible: internalVisible,
     });
 
+    const rootStyle: React.CSSProperties = {
+      zIndex,
+    };
+
     return (
-      <div className={internalVisible ? 'ice-dialog-root visible' : 'ice-dialog-root'}>
-        {mask && (
-          <div
-            className={maskClass}
-            onClick={handleMaskClick}
-          />
-        )}
-        <div
-          ref={dialogRef}
-          className={dialogClass}
-          style={dialogStyle}
-        >
-          <div
-            className="ice-dialog-header"
-            onMouseDown={handleMouseDown}
-          >
+      <div
+        className={internalVisible ? 'ice-dialog-root visible' : 'ice-dialog-root'}
+        style={rootStyle}
+      >
+        {mask && <div className={maskClass} onClick={handleMaskClick} style={{ zIndex }} />}
+        <div ref={dialogRef} className={dialogClass} style={dialogStyle}>
+          <div className="ice-dialog-header" onMouseDown={handleMouseDown}>
             <div className="ice-dialog-title">{title}</div>
             {closable && (
-              <div
-                className="ice-dialog-close"
-                onClick={handleClose}
-              >
+              <div className="ice-dialog-close" onClick={handleClose}>
                 ×
               </div>
             )}
@@ -194,16 +201,10 @@ const Dialog: React.FC<DialogProps> = ({
             <div className="ice-dialog-footer">
               {footer || (
                 <>
-                  <button
-                    className="ice-dialog-btn ice-dialog-btn-default"
-                    onClick={handleClose}
-                  >
+                  <button className="ice-dialog-btn ice-dialog-btn-default" onClick={handleClose}>
                     Cancel
                   </button>
-                  <button
-                    className="ice-dialog-btn ice-dialog-btn-primary"
-                    onClick={handleOk}
-                  >
+                  <button className="ice-dialog-btn ice-dialog-btn-primary" onClick={handleOk}>
                     Confirm
                   </button>
                 </>
@@ -215,10 +216,7 @@ const Dialog: React.FC<DialogProps> = ({
     );
   };
 
-  return ReactDOM.createPortal(
-    renderDialog(),
-    document.body
-  );
+  return ReactDOM.createPortal(renderDialog(), document.body);
 };
 
 export default Dialog;

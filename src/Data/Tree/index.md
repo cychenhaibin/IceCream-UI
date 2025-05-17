@@ -369,15 +369,29 @@ const Demo = () => {
     console.log('tree drag over:', dropNode.title);
   };
 
-  const handleDragEnd = (dragNode: TreeNode, dropNode: TreeNode | null, dropType: 'before' | 'after' | 'inner', e: React.DragEvent) => {
+  const handleDragEnd = (
+    dragNode: TreeNode,
+    dropNode: TreeNode | null,
+    dropType: 'before' | 'after' | 'inner',
+    e: React.DragEvent,
+  ) => {
     console.log('tree drag end:', dropNode?.title, dropType);
   };
 
-  const handleDrop = (dragNode: TreeNode, dropNode: TreeNode, dropType: 'before' | 'after' | 'inner', e: React.DragEvent) => {
+  const handleDrop = (
+    dragNode: TreeNode,
+    dropNode: TreeNode,
+    dropType: 'before' | 'after' | 'inner',
+    e: React.DragEvent,
+  ) => {
     console.log('tree drop:', dropNode.title, dropType);
   };
 
-  const allowDrop = (dragNode: TreeNode, dropNode: TreeNode, dropType: 'before' | 'after' | 'inner') => {
+  const allowDrop = (
+    dragNode: TreeNode,
+    dropNode: TreeNode,
+    dropType: 'before' | 'after' | 'inner',
+  ) => {
     if (dropNode.title === 'Level two 3-1') {
       return dropType !== 'inner';
     }
@@ -408,49 +422,48 @@ const Demo = () => {
 export default Demo;
 ```
 
-
 ## API
 
 ### Tree
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| data | 树形数据 | TreeNode[] | - |
-| defaultExpandedKeys | 默认展开的节点 | string[] | [] |
-| defaultSelectedKeys | 默认选中的节点 | string[] | [] |
-| defaultCheckedKeys | 默认勾选的节点 | string[] | [] |
-| expandedKeys | 受控的展开节点 | string[] | - |
-| selectedKeys | 受控的选中节点 | string[] | - |
-| checkedKeys | 受控的勾选节点 | string[] | - |
-| checkable | 是否显示复选框 | boolean | false |
-| selectable | 是否可选中 | boolean | true |
-| multiple | 是否允许多选 | boolean | false |
-| accordion | 是否只允许同时展开一个节点 | boolean | false |
-| draggable | 是否允许拖拽 | boolean | false |
-| showLine | 是否显示连接线 | boolean | false |
-| loadData | 异步加载数据 | (node: TreeNode) => Promise<void> | - |
-| onExpand | 展开节点时的回调 | (expandedKeys: string[], info: { node: TreeNode; expanded: boolean }) => void | - |
-| onSelect | 选中节点时的回调 | (selectedKeys: string[], info: { node: TreeNode; selected: boolean }) => void | - |
-| onCheck | 勾选节点时的回调 | (checkedKeys: string[], info: { node: TreeNode; checked: boolean }) => void | - |
-| onDragStart | 开始拖拽时的回调 | (node: TreeNode) => void | - |
-| onDragEnd | 结束拖拽时的回调 | (node: TreeNode) => void | - |
-| onDrop | 放置节点时的回调 | (info: { dragNode: TreeNode; dropNode: TreeNode; dropPosition: number }) => void | - |
-| filterValue | 过滤值 | string | - |
-| className | 额外的 CSS 类名 | string | - |
-| style | 额外的样式 | React.CSSProperties | - |
+| data | 树形数据 | `TreeNode[]` | - |
+| defaultExpandedKeys | 默认展开的节点 | `string[]` | [] |
+| defaultSelectedKeys | 默认选中的节点 | `string[]` | [] |
+| defaultCheckedKeys | 默认勾选的节点 | `string[]` | [] |
+| expandedKeys | 受控的展开节点 | `string[]` | - |
+| selectedKeys | 受控的选中节点 | `string[]` | - |
+| checkedKeys | 受控的勾选节点 | `string[]` | - |
+| checkable | 是否显示复选框 | `boolean` | false |
+| selectable | 是否可选中 | `boolean` | true |
+| multiple | 是否允许多选 | `boolean` | false |
+| accordion | 是否只允许同时展开一个节点 | `boolean` | false |
+| draggable | 是否允许拖拽 | `boolean` | false |
+| showLine | 是否显示连接线 | `boolean` | false |
+| loadData | 异步加载数据 | `(node: TreeNode) => Promise<void>` | - |
+| onExpand | 展开节点时的回调 | `(expandedKeys: string[], info: { node: TreeNode; expanded: boolean }) => void` | - |
+| onSelect | 选中节点时的回调 | `(selectedKeys: string[], info: { node: TreeNode; selected: boolean }) => void` | - |
+| onCheck | 勾选节点时的回调 | `(checkedKeys: string[], info: { node: TreeNode; checked: boolean }) => void` | - |
+| onDragStart | 开始拖拽时的回调 | `(node: TreeNode) => void` | - |
+| onDragEnd | 结束拖拽时的回调 | `(node: TreeNode) => void` | - |
+| onDrop | 放置节点时的回调 | `(info: { dragNode: TreeNode; dropNode: TreeNode; dropPosition: number }) => void` | - |
+| filterValue | 过滤值 | `string` | - |
+| className | 额外的 CSS 类名 | `string` | - |
+| style | 额外的样式 | `React.CSSProperties` | - |
 
 ### TreeNode
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| key | 唯一标识 | string | - |
-| title | 节点标题 | React.ReactNode | - |
-| children | 子节点 | TreeNode[] | - |
-| isLeaf | 是否为叶子节点 | boolean | - |
-| disabled | 是否禁用 | boolean | false |
-| checkable | 是否显示复选框 | boolean | true |
-| selectable | 是否可选中 | boolean | true |
-| expanded | 是否展开 | boolean | false |
-| selected | 是否选中 | boolean | false |
-| checked | 是否勾选 | boolean | false |
-| loading | 是否加载中 | boolean | false |
+| 参数       | 说明           | 类型              | 默认值 |
+| ---------- | -------------- | ----------------- | ------ |
+| key        | 唯一标识       | `string`          | -      |
+| title      | 节点标题       | `React.ReactNode` | -      |
+| children   | 子节点         | `TreeNode[]`      | -      |
+| isLeaf     | 是否为叶子节点 | `boolean`         | -      |
+| disabled   | 是否禁用       | `boolean`         | false  |
+| checkable  | 是否显示复选框 | `boolean`         | true   |
+| selectable | 是否可选中     | `boolean`         | true   |
+| expanded   | 是否展开       | `boolean`         | false  |
+| selected   | 是否选中       | `boolean`         | false  |
+| checked    | 是否勾选       | `boolean`         | false  |
+| loading    | 是否加载中     | `boolean`         | false  |

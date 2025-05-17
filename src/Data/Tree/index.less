@@ -1,18 +1,18 @@
-@import '../../style/variables.less';
+@import '../../styles/variables.less';
 
 .ice-tree {
   width: 50%;
+  color: @text-color;
   font-size: 14px;
   line-height: 1.5;
-  color: @text-color;
 
   .ice-tree-node {
     position: relative;
+    box-sizing: border-box;
+    width: 100%;
     padding: 4px 0;
     cursor: pointer;
     transition: all 0.3s;
-    width: 100%;
-    box-sizing: border-box;
 
     &:hover {
       background-color: @item-hover-bg;
@@ -24,11 +24,11 @@
     }
 
     &.ice-tree-node-selected {
-      background-color: rgba(24, 144, 255, 0.1);
-      color: @primary-color;
+      width: calc(100% + 24px);
       margin-left: -24px;
       padding-left: 24px;
-      width: calc(100% + 24px);
+      color: @primary-color;
+      background-color: rgba(24, 144, 255, 0.1);
     }
 
     .ice-tree-node-indent {
@@ -60,14 +60,14 @@
       justify-content: center;
       width: 16px;
       height: 16px;
-      margin-right: 8px;
       margin-top: -2px;
+      margin-right: 8px;
+      vertical-align: middle;
+      background-color: #fff;
       border: 1px solid #d9d9d9;
       border-radius: 2px;
-      background-color: #fff;
       cursor: pointer;
       transition: all 0.2s;
-      vertical-align: middle;
 
       &:hover {
         border-color: @primary-color;
@@ -123,17 +123,17 @@
     }
 
     &-drag-over {
-      background-color: rgba(24, 144, 255, 0.1);
       position: relative;
+      background-color: rgba(24, 144, 255, 0.1);
 
       &::before {
-        content: '';
         position: absolute;
-        left: 0;
         right: 0;
+        left: 0;
+        z-index: 1;
         height: 2px;
         background-color: @primary-color;
-        z-index: 1;
+        content: '';
       }
 
       &-top::before {
@@ -145,7 +145,7 @@
       }
     }
 
-    &[draggable="true"] {
+    &[draggable='true'] {
       cursor: move;
       user-select: none;
 

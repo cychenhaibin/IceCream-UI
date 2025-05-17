@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import Message from './index';
 
 type MessageType = 'success' | 'warning' | 'error' | 'info';
@@ -7,9 +7,10 @@ type MessageType = 'success' | 'warning' | 'error' | 'info';
 const createMessage = (type: MessageType, content: React.ReactNode, duration?: number) => {
   const container = document.createElement('div');
   document.body.appendChild(container);
+  const root = createRoot(container);
 
   const handleClose = () => {
-    ReactDOM.unmountComponentAtNode(container);
+    root.unmount();
     document.body.removeChild(container);
   };
 
@@ -20,7 +21,7 @@ const createMessage = (type: MessageType, content: React.ReactNode, duration?: n
     onClose: handleClose,
   });
 
-  ReactDOM.render(messageElement, container);
+  root.render(messageElement);
 };
 
 export default {

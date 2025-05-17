@@ -1,4 +1,3 @@
-
 # Button 按钮
 
 按钮用于开始一个即时操作。
@@ -18,9 +17,7 @@ import { Button } from 'IceCream-UI';
 import './index.less';
 
 export default () => {
-  return (
-    <Button>默认按钮</Button>
-  );
+  return <Button>默认按钮</Button>;
 };
 ```
 
@@ -52,7 +49,9 @@ export default () => {
   return (
     <div style={{ display: 'flex', gap: '20px' }}>
       <Button disabled>禁用按钮</Button>
-      <Button type="highlight" disabled>禁用高亮按钮</Button>
+      <Button type="highlight" disabled>
+        禁用高亮按钮
+      </Button>
     </div>
   );
 };
@@ -66,24 +65,20 @@ import { Button } from 'IceCream-UI';
 import './index.less';
 
 export default () => {
-  return (
-    <Button icon={<span>🚀</span>}>
-      带图标的按钮
-    </Button>
-  );
+  return <Button icon={<span>🚀</span>}>带图标的按钮</Button>;
 };
 ```
 
 ## API
 
-| 参数 | 说明 | 类型                         | 默认值 |
-| --- | --- |----------------------------| --- |
-| type | 按钮类型 | `highlight` \| `default`    | `default` |
-| disabled | 按钮是否禁用 | `boolean`                    | `false` |
-| icon | 设置按钮的图标 | `ReactNode`                  | - |
-| text | 按钮文本 | `string`                     | - |
-| className | 自定义类名 | `string`                     | - |
-| style | 自定义样式 | `object`                     | - |
-| onClick | 点击按钮时的回调函数 | `(event: MouseEvent) => void` | - |
+| 参数      | 说明                 | 类型                          | 默认值    |
+| --------- | -------------------- | ----------------------------- | --------- |
+| type      | 按钮类型             | `highlight` \| `default`      | `default` |
+| disabled  | 按钮是否禁用         | `boolean`                     | `false`   |
+| icon      | 设置按钮的图标       | `ReactNode`                   | -         |
+| text      | 按钮文本             | `string`                      | -         |
+| className | 自定义类名           | `string`                      | -         |
+| style     | 自定义样式           | `object`                      | -         |
+| onClick   | 点击按钮时的回调函数 | `(event: MouseEvent) => void` | -         |
 
 More skills for writing demo: https://d.umijs.org/guide/basic#write-component-demo

@@ -52,7 +52,7 @@ const Rate: React.FC<RateProps> = ({
 
   // 获取颜色
   const getColor = (index: number) => {
-    const val = hoverValue >= 0 ? hoverValue : currentValue;
+    const val = hoverValue >= 0 ? hoverValue : typeof value === 'number' ? value : currentValue;
     if (val <= lowThreshold) {
       return colors[0];
     } else if (val <= highThreshold) {
@@ -69,7 +69,9 @@ const Rate: React.FC<RateProps> = ({
     const position = (event.clientX - rect.left) / rect.width;
 
     if (allowHalf) {
-      setHoverValue(position <= 0.5 ? index - 0.5 : index);
+      // 使用更精确的判断逻辑
+      const isLeftHalf = position < 0.5;
+      setHoverValue(isLeftHalf ? index - 0.5 : index);
     } else {
       setHoverValue(index);
     }
@@ -81,11 +83,22 @@ const Rate: React.FC<RateProps> = ({
   };
 
   // 处理点击
-  const handleClick = (index: number) => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>, index: number) => {
     if (disabled || readonly) return;
 
-    const newValue = hoverValue >= 0 ? hoverValue : index;
-    if (allowClear && currentValue === newValue) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const position = (event.clientX - rect.left) / rect.width;
+    let newValue = index;
+
+    if (allowHalf) {
+      // 使用更精确的判断逻辑
+      const isLeftHalf = position < 0.5;
+      newValue = isLeftHalf ? index - 0.5 : index;
+    }
+
+    // 使用实际值而不是finalValue来判断是否清除
+    const actualValue = typeof value === 'number' ? value : currentValue;
+    if (allowClear && Math.abs(actualValue - newValue) < 0.1) {
       setCurrentValue(0);
       onChange?.(0);
     } else {
@@ -93,6 +106,10 @@ const Rate: React.FC<RateProps> = ({
       onChange?.(newValue);
     }
   };
+
+  // hoverValue 优先于 value 和 currentValue，实现动态 hover 效果
+  const finalValue =
+    hoverValue >= 0 ? hoverValue : typeof value === 'number' ? value : currentValue;
 
   return (
     <div
@@ -104,9 +121,8 @@ const Rate: React.FC<RateProps> = ({
     >
       <div className="ice-rate-items">
         {Array.from({ length: max }, (_, i) => i + 1).map((index) => {
-          const isActive = (hoverValue >= 0 ? hoverValue : currentValue) >= index;
-          const isHalf = allowHalf &&
-            (hoverValue >= 0 ? hoverValue : currentValue) + 0.5 === index;
+          const isActive = finalValue >= index;
+          const isHalf = allowHalf && finalValue + 0.5 === index;
 
           return (
             <div
@@ -119,7 +135,7 @@ const Rate: React.FC<RateProps> = ({
                 color: isActive || isHalf ? getColor(index) : '#E8E8E8',
                 cursor: disabled || readonly ? 'default' : 'pointer',
               }}
-              onClick={() => handleClick(index)}
+              onClick={(e) => handleClick(e, index)}
               onMouseMove={(e) => handleMouseMove(e, index)}
             >
               {getIconCharacter(icon)}
@@ -128,9 +144,7 @@ const Rate: React.FC<RateProps> = ({
         })}
       </div>
       {showText && texts.length > 0 && (
-        <span className="ice-rate-text">
-          {texts[Math.ceil((hoverValue >= 0 ? hoverValue : currentValue) - 1)]}
-        </span>
+        <span className="ice-rate-text">{texts[Math.ceil(finalValue) - 1]}</span>
       )}
     </div>
   );

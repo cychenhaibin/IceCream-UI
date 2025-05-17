@@ -1,4 +1,3 @@
-
 # Message 消息提示
 
 全局展示操作反馈信息，支持多种类型和自定义配置。
@@ -21,17 +20,17 @@ import './index.less';
 export default () => {
   return (
     <div className="IceCream-UI-demo-container">
-      <button 
-        onClick={() => message.success('这是一条成功消息')}
+      <button
+        onClick={() => message.success('Success')}
         className="IceCream-UI-demo-button IceCream-UI-demo-success"
       >
-        显示成功消息
+        Success
       </button>
-      <button 
-        onClick={() => message.error('这是一条错误消息')}
+      <button
+        onClick={() => message.error('Error')}
         className="IceCream-UI-demo-button IceCream-UI-demo-error"
       >
-        显示错误消息
+        Error
       </button>
     </div>
   );
@@ -48,26 +47,26 @@ import './index.less';
 export default () => {
   return (
     <div className="IceCream-UI-demo-container">
-      <button 
-        onClick={() => message.success('成功消息')}
+      <button
+        onClick={() => message.success('Success')}
         className="IceCream-UI-demo-button IceCream-UI-demo-success"
       >
         Success
       </button>
-      <button 
-        onClick={() => message.error('错误消息')}
+      <button
+        onClick={() => message.error('Error')}
         className="IceCream-UI-demo-button IceCream-UI-demo-error"
       >
         Error
       </button>
-      <button 
-        onClick={() => message.warning('警告消息')}
+      <button
+        onClick={() => message.warning('Warning')}
         className="IceCream-UI-demo-button IceCream-UI-demo-warning"
       >
         Warning
       </button>
-      <button 
-        onClick={() => message.info('提示消息')}
+      <button
+        onClick={() => message.info('Info')}
         className="IceCream-UI-demo-button IceCream-UI-demo-info"
       >
         Info
@@ -87,17 +86,17 @@ import './index.less';
 export default () => {
   return (
     <div className="IceCream-UI-demo-container">
-      <button 
-        onClick={() => message.success('这条消息将在 5 秒后消失', 5000)}
+      <button
+        onClick={() => message.success('Message 将在 5 秒后消失', 5000)}
         className="IceCream-UI-demo-button IceCream-UI-demo-success"
       >
-        显示 5 秒的消息
+        显示 5 秒的 Message
       </button>
-      <button 
-        onClick={() => message.success('这条消息将在 10 秒后消失', 10000)}
+      <button
+        onClick={() => message.success('Message 将在 10 秒后消失', 10000)}
         className="IceCream-UI-demo-button IceCream-UI-demo-success"
       >
-        显示 10 秒的消息
+        显示 10 秒的 Message
       </button>
     </div>
   );
@@ -113,13 +112,15 @@ import './index.less';
 
 export default () => {
   return (
-    <button 
-      onClick={() => message.success('消息将在 3 秒后消失', 3000, () => {
-        console.log('消息已关闭');
-      })}
+    <button
+      onClick={() =>
+        message.success('Message 将在 3 秒后消失', 3000, () => {
+          console.log('消息已关闭');
+        })
+      }
       className="IceCream-UI-demo-button IceCream-UI-demo-success"
     >
-      显示带回调的消息
+      显示带回调的 Message
     </button>
   );
 };
@@ -129,12 +130,12 @@ export default () => {
 
 ### Message
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| type | 消息类型 | `success` \| `warning` \| `error` \| `info` | `info` |
-| content | 提示内容 | `ReactNode` | - |
-| duration | 自动关闭的延时，单位毫秒 | `number` | 3000 |
-| onClose | 关闭时触发的回调函数 | `() => void` | - |
+| 参数     | 说明                     | 类型                                        | 默认值 |
+| -------- | ------------------------ | ------------------------------------------- | ------ |
+| type     | 消息类型                 | `success` \| `warning` \| `error` \| `info` | `info` |
+| content  | 提示内容                 | `ReactNode`                                 | -      |
+| duration | 自动关闭的延时，单位毫秒 | `number`                                    | 3000   |
+| onClose  | 关闭时触发的回调函数     | `() => void`                                | -      |
 
 ### message 方法
 

@@ -3,9 +3,9 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
-    "types": ["jest"],
+    "types": ["jest", "react", "react-dom"],
     "strict": true,
     "skipLibCheck": true,
     "declaration": true
