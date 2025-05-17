@@ -1,5 +1,5 @@
 import { defineConfig } from 'dumi';
-const repo = 'dumi-book-test';
+const repo = 'IceCream-UI';
 
 export default defineConfig({
   title: 'IceCream-UI',
