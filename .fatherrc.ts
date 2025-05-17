@@ -1,13 +1,19 @@
-export default {
+import { defineConfig } from 'father';
+
+export default defineConfig({
   // more father 4 config: https://github.com/umijs/father-next/blob/master/docs/config.md
   esm: {
-    output: 'es',
+    output: 'dist/esm',
+    ignores: ['**/demos/**', '**/__tests__/**'],
   },
   cjs: {
-    output: 'lib',
+    output: 'dist/cjs',
+    ignores: ['**/demos/**', '**/__tests__/**'],
   },
-  extraBabelPlugins: [
-    ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
-  ],
+  umd: {
+    name: 'IceCreamUI',
+    output: 'dist/umd',
+  },
+  extraBabelPlugins: [['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]],
   lessInBabelMode: true,
-};
+});
