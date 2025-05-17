@@ -28,10 +28,14 @@ jobs:
           node-version: 16.x
           cache: 'npm'
 
+      # 生成 package-lock.json
+      - name: Generate package-lock.json
+        run: npm install --package-lock-only
+
       # 打包代码
       - name: Build Project
         run: |
-          npm install
+          npm ci
           npm run build
 
       # 部署到github
