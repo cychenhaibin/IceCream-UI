@@ -1,19 +1,21 @@
-import React, {createContext} from "react";
+import React, { createContext, PropsWithChildren } from 'react';
 
 interface Config {
   prefix?: string;
 }
 
-const defaultConfig:Config = {
+const defaultConfig: Config = {
   prefix: 'IceCream-UI',
-}
-export const ConfigContext = createContext(defaultConfig)
+};
 
-function ConfigProvider({ children }: Config) {
-  return (
-    <div>
-      ConfigProvider
-    </div>
-  )
+export const ConfigContext = createContext(defaultConfig);
+
+interface ConfigProviderProps extends Config {
+  children: React.ReactNode;
 }
-export default ConfigProvider
+
+function ConfigProvider({ children, ...config }: ConfigProviderProps) {
+  return <ConfigContext.Provider value={config}>{children}</ConfigContext.Provider>;
+}
+
+export default ConfigProvider;

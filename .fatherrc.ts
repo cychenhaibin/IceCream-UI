@@ -15,5 +15,4 @@ export default defineConfig({
     output: 'dist/umd',
   },
   extraBabelPlugins: [['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]],
-  lessInBabelMode: true,
 });

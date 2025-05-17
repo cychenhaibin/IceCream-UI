@@ -1,0 +1,434 @@
+.ice-dialog-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  width: 100%;
+  height: 100%;
+
+  &.visible {
+    display: block;
+  }
+
+  .ice-dialog-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &.visible {
+      opacity: 1;
+    }
+  }
+
+  .ice-dialog {
+    position: fixed;
+    top: 33.33vh;
+    left: 50%;
+    z-index: 1001;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
+
+    &.visible {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    &-centered {
+      top: 50%;
+    }
+
+    &-fullscreen {
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0;
+      transform: none !important;
+      opacity: 0;
+      transition: opacity 0.15s ease !important;
+
+      &.visible {
+        transform: none !important;
+        opacity: 1;
+      }
+
+      .ice-dialog-content {
+        height: calc(100% - 110px);
+        max-height: none;
+        overflow-y: auto;
+      }
+
+      .ice-dialog-header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        padding: 16px 24px;
+        background: #fff;
+      }
+
+      .ice-dialog-footer {
+        position: sticky;
+        bottom: 0;
+        z-index: 1;
+        padding: 10px 24px;
+        background: #fff;
+      }
+    }
+
+    &-draggable {
+      .ice-dialog-header {
+        cursor: move;
+      }
+    }
+
+    &-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    &-title {
+      color: rgba(0, 0, 0, 0.85);
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    &-close {
+      padding: 0;
+      color: rgba(0, 0, 0, 0.45);
+      font-size: 16px;
+      line-height: 1;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s;
+
+      &:hover {
+        color: rgba(0, 0, 0, 0.85);
+      }
+    }
+
+    &-content {
+      max-height: calc(100vh - 200px);
+      padding: 24px;
+      overflow-y: auto;
+      font-size: 14px;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    &-footer {
+      padding: 10px 16px;
+      text-align: right;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    &-btn {
+      margin-left: 8px;
+      padding: 4px 15px;
+      font-size: 14px;
+      border: 1px solid #d9d9d9;
+      border-radius: 2px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &-default {
+        color: rgba(0, 0, 0, 0.85);
+        background-color: #fff;
+
+        &:hover {
+          color: #40a9ff;
+          border-color: #40a9ff;
+        }
+      }
+
+      &-primary {
+        color: #fff;
+        background-color: #1890ff;
+        border-color: #1890ff;
+
+        &:hover {
+          background-color: #40a9ff;
+          border-color: #40a9ff;
+        }
+      }
+    }
+  }
+
+  // 美化按钮样式
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
+    height: 32px;
+    padding: 4px 15px;
+    font-weight: 400;
+    font-size: 14px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    user-select: none;
+    touch-action: manipulation;
+
+    // 默认按钮样式
+    &.ice-btn-default {
+      color: rgba(0, 0, 0, 0.85);
+      background: #fff;
+      border-color: #d9d9d9;
+
+      &:hover {
+        color: #40a9ff;
+        border-color: #40a9ff;
+      }
+
+      &:active {
+        color: #096dd9;
+        border-color: #096dd9;
+      }
+    }
+
+    // 主要按钮样式
+    &.ice-btn-primary {
+      color: #fff;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+      background: #1890ff;
+      border-color: #1890ff;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+
+      &:hover {
+        background: #40a9ff;
+        border-color: #40a9ff;
+      }
+
+      &:active {
+        background: #096dd9;
+        border-color: #096dd9;
+      }
+    }
+
+    // 危险按钮样式
+    &.ice-btn-danger {
+      color: #fff;
+      background: #ff4d4f;
+      border-color: #ff4d4f;
+
+      &:hover {
+        background: #ff7875;
+        border-color: #ff7875;
+      }
+
+      &:active {
+        background: #d9363e;
+        border-color: #d9363e;
+      }
+    }
+
+    // 禁用状态
+    &[disabled] {
+      color: rgba(0, 0, 0, 0.25);
+      text-shadow: none;
+      background: #f5f5f5;
+      border-color: #d9d9d9;
+      box-shadow: none;
+      cursor: not-allowed;
+
+      &:hover {
+        color: rgba(0, 0, 0, 0.25);
+        background: #f5f5f5;
+        border-color: #d9d9d9;
+      }
+    }
+  }
+
+  // 对话框底部按钮样式
+  .ice-dialog-footer {
+    padding: 10px 16px;
+    text-align: right;
+    border-top: 1px solid #f0f0f0;
+
+    button {
+      margin-left: 8px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    // 加载中状态
+    .ice-btn-loading {
+      cursor: default;
+      opacity: 0.7;
+      pointer-events: none;
+
+      &::before {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        margin-right: 8px;
+        border: 2px solid currentColor;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: btn-spin 1s infinite linear;
+        content: '';
+      }
+    }
+  }
+
+  .ice-dialog-fullscreen + .ice-dialog-mask {
+    transition: opacity 0.15s ease !important;
+  }
+}
+
+// 动画效果
+.ice-dialog-root {
+  .ice-dialog {
+    animation: dialogZoomIn 0.3s cubic-bezier(0.08, 0.82, 0.17, 1);
+  }
+
+  .ice-dialog-mask {
+    animation: dialogFadeIn 0.3s cubic-bezier(0.08, 0.82, 0.17, 1);
+  }
+}
+
+@keyframes dialogZoomIn {
+  from {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dialogFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// 按钮加载动画
+@keyframes btn-spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// 按钮尺寸
+.ice-btn-large {
+  height: 40px;
+  padding: 6.4px 15px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.ice-btn-small {
+  height: 24px;
+  padding: 0 7px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+// 按钮组
+.ice-btn-group {
+  display: inline-flex;
+
+  button {
+    margin-left: 0;
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    &:not(:first-child) {
+      margin-left: -1px;
+    }
+
+    &:hover {
+      position: relative;
+      z-index: 1;
+    }
+  }
+}
+
+// 幽灵按钮
+.ice-btn-ghost {
+  color: #1890ff;
+  background: transparent;
+  border-color: #1890ff;
+
+  &:hover {
+    color: #40a9ff;
+    background: rgba(24, 144, 255, 0.1);
+    border-color: #40a9ff;
+  }
+
+  &:active {
+    color: #096dd9;
+    background: rgba(24, 144, 255, 0.2);
+    border-color: #096dd9;
+  }
+}
+
+// 链接按钮
+.ice-btn-link {
+  color: #1890ff;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+
+  &:hover {
+    color: #40a9ff;
+  }
+
+  &:active {
+    color: #096dd9;
+  }
+}
+
+// 文本按钮
+.ice-btn-text {
+  color: rgba(0, 0, 0, 0.85);
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  &:active {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}

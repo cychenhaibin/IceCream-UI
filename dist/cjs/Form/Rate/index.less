@@ -1,0 +1,87 @@
+.ice-rate {
+  display: inline-flex;
+  align-items: center;
+  font-size: 20px;
+  line-height: 1;
+
+  &-items {
+    position: relative;
+    display: inline-flex;
+  }
+
+  &-item {
+    position: relative;
+    margin-right: 8px;
+
+    // 未选中状态
+    color: #e8e8e8;
+    transition: transform 0.15s ease-in-out;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    // 悬停效果
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    // 选中状态
+    &-active {
+      color: #f7ba2a;
+    }
+
+    // 半选状态
+    &-half {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 50%;
+        background-color: #fff;
+        mix-blend-mode: color;
+        content: '';
+      }
+    }
+  }
+
+  &-text {
+    margin-left: 8px;
+    color: #909399;
+    font-size: 14px;
+  }
+
+  &-small {
+    font-size: 16px;
+
+    .ice-rate-text {
+      font-size: 12px;
+    }
+  }
+
+  &-large {
+    font-size: 24px;
+
+    .ice-rate-text {
+      font-size: 16px;
+    }
+  }
+
+  // 禁用状态
+  &-disabled {
+    .ice-rate-item {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  // 只读状态
+  &-readonly {
+    .ice-rate-item {
+      cursor: default;
+    }
+  }
+}
