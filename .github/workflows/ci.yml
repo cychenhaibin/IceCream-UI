@@ -16,6 +16,10 @@ jobs:
       pages: write
       id-token: write
 
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       # 拉代码
       - name: Checkout code
@@ -35,7 +39,9 @@ jobs:
 
       # 部署到github
       - name: Deploy to Github
+        id: deployment
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           branch: build # 打包的内容放到build分支下
           folder: dist
+          clean: true
