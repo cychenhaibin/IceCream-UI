@@ -21,21 +21,21 @@ export default () => {
   const treeData = [
     {
       key: '1',
-      title: '节点 1',
+      title: 'Level one 1',
       children: [
         {
           key: '1-1',
-          title: '节点 1-1',
+          title: 'Level two 1-1',
         },
         {
           key: '1-2',
-          title: '节点 1-2',
+          title: 'Level two 1-2',
         },
       ],
     },
     {
       key: '2',
-      title: '节点 2',
+      title: 'Level two 2',
     },
   ];
 
@@ -54,15 +54,15 @@ export default () => {
   const treeData = [
     {
       key: '1',
-      title: '节点 1',
+      title: 'Level one 1',
       children: [
         {
           key: '1-1',
-          title: '节点 1-1',
+          title: 'Level two 1-1',
         },
         {
           key: '1-2',
-          title: '节点 1-2',
+          title: 'Level two 1-2',
         },
       ],
     },
@@ -93,15 +93,15 @@ export default () => {
   const treeData = [
     {
       key: '1',
-      title: '节点 1',
+      title: 'Level one 1',
       children: [
         {
           key: '1-1',
-          title: '节点 1-1',
+          title: 'Level one 1-1',
         },
         {
           key: '1-2',
-          title: '节点 1-2',
+          title: 'Level two 1-2',
         },
       ],
     },
@@ -131,7 +131,7 @@ export default () => {
   const treeData = [
     {
       key: '1',
-      title: '节点 1',
+      title: 'Level one 1',
     },
   ];
 
@@ -140,8 +140,8 @@ export default () => {
     return new Promise((resolve) => {
       setTimeout(() => {
         node.children = [
-          { key: `${node.key}-1`, title: '子节点 1' },
-          { key: `${node.key}-2`, title: '子节点 2' },
+          { key: `${node.key}-1`, title: 'Level one 1' },
+          { key: `${node.key}-2`, title: 'Level one 2' },
         ];
         resolve();
       }, 1000);
@@ -163,16 +163,16 @@ export default () => {
   const treeData = [
     {
       key: '1',
-      title: '节点 1',
+      title: 'Level one 1',
       children: [
         {
           key: '1-1',
-          title: '节点 1-1',
+          title: 'Level two 1-1',
           disabled: true,
         },
         {
           key: '1-2',
-          title: '节点 1-2',
+          title: 'Level two 1-2',
         },
       ],
     },
@@ -193,11 +193,11 @@ export default () => {
   const treeData = [
     {
       key: '1',
-      title: '节点 1',
+      title: 'Level one 1-1',
       children: [
         {
           key: '1-1',
-          title: '节点 1-1',
+          title: 'Level two 1-1',
         },
       ],
     },
@@ -225,17 +225,17 @@ export default () => {
   const treeData = [
     {
       key: '1',
-      title: '节点 1',
+      title: 'Level one 1',
       children: [
         {
           key: '1-1',
-          title: '节点 1-1',
+          title: 'Level two 1-1',
         },
       ],
     },
   ];
 
-  return <Tree data={treeData} filterValue="节点 1" />;
+  return <Tree data={treeData} filterValue="Level one 1" />;
 };
 ```
 
@@ -250,21 +250,21 @@ export default () => {
   const treeData = [
     {
       key: '1',
-      title: '节点 1',
+      title: 'Level one 1',
       children: [
         {
           key: '1-1',
-          title: '节点 1-1',
+          title: 'Level two 1-1',
         },
       ],
     },
     {
       key: '2',
-      title: '节点 2',
+      title: 'Level one 2',
       children: [
         {
           key: '2-1',
-          title: '节点 2-1',
+          title: 'Level two 2-1',
         },
       ],
     },
