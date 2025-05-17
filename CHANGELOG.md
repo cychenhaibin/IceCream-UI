@@ -9,3 +9,5 @@
 2025.5.1 @cychenhaibin feat：Rate 组件、Dialog 组件
 
 2025.5.17 @cychenhaibin feat：add index.test.tsx && Icon 组件
+
+2025.5.17 @cychenhaibin feat：add 部署
