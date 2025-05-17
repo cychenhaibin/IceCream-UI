@@ -1,22 +1,40 @@
-import React from 'react';
+import './style/index.less';
 import classNames from 'classnames';
-import './index.less';
+import React, { FC } from 'react';
+import { message } from 'IceCream-UI';
 
-export interface IconProps {
-  type: string;
-  className?: string;
-  style?: React.CSSProperties;
-  onClick?: (e: React.MouseEvent) => void;
+interface IconProps {
+  name?: string;
+  onClick?: React.MouseEventHandler<HTMLElement> | void;
+  size?: number | string;
 }
 
-const Icon: React.FC<IconProps> = ({ type, className, style, onClick }) => {
-  return (
-    <i
-      className={classNames('ice-icon', `ice-icon-${type}`, className)}
-      style={style}
-      onClick={onClick}
-    />
-  );
+const Icon: FC<IconProps> = ({ name, size = 30, onClick }) => {
+  const styleObj = { fontSize: size };
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (name) {
+      navigator.clipboard
+        .writeText(name)
+        .then(() => {
+          message.success('复制成功');
+        })
+        .catch(() => {
+          message.error('复制失败');
+        });
+    }
+    if (onClick) onClick(e);
+  };
+
+  const classes = classNames('iconfont', {
+    [`icon-${name}`]: name,
+    [`icon_${name}`]: name,
+    [`icon-icon_${name}`]: name,
+    [`icon-icon-${name}`]: name,
+  });
+
+  return <i onClick={handleClick} className={classes} style={styleObj}></i>;
 };
 
 export default Icon;

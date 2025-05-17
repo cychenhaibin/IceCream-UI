@@ -527,19 +527,19 @@ const Tree: React.FC<TreeProps> = ({
         <span className="ice-tree-node-indent">
           {showExpandIcon && (
             <span className="ice-tree-switcher" onClick={() => !disabled && handleExpand(node)}>
-              <Icon type={isExpanded ? 'down' : 'right'} />
+              <Icon type={isExpanded ? 'arrow-down' : 'arrow-right'} />
             </span>
           )}
         </span>
         {checkable && nodeCheckable !== false && (
           <span className={checkboxClasses} onClick={handleCheckboxClick}>
-            {isChecked && <Icon type="check-square" />}
+            {isChecked && <Icon type="check" />}
           </span>
         )}
         <span className="ice-tree-node-content" onClick={handleNodeClick}>
           {title}
         </span>
-        {isLoading && <Icon type="loading" className="ice-tree-loading-icon" />}
+        {isLoading && <Icon type="loading" className="ice-tree-loading-icon" spin />}
         {isExpanded && hasChildren && (
           <div className="ice-tree-child-nodes">
             {children.map((child) => renderTreeNode(child, level + 1))}
