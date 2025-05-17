@@ -1,0 +1,82 @@
+@prefix: 'IceCream-UI';
+@inputTagPrefix: ~'@{prefix}-input-tag';
+
+.@{inputTagPrefix} {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 4px 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: all 0.3s;
+
+  &-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  &-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+    cursor: move;
+    user-select: none;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: #e6e6e6;
+    }
+
+    &-close {
+      margin-left: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      color: #999;
+
+      &:hover {
+        color: #666;
+      }
+    }
+  }
+
+  &-input {
+    flex: 1;
+    min-width: 100px;
+    padding: 4px 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    line-height: 1.5;
+
+    &::placeholder {
+      color: #bfbfbf;
+    }
+  }
+
+  &-disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+
+    .@{inputTagPrefix}-tag {
+      cursor: not-allowed;
+      background-color: #f5f5f5;
+    }
+
+    .@{inputTagPrefix}-input {
+      cursor: not-allowed;
+    }
+  }
+
+  &-focused {
+    border-color: #1890ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  }
+}
