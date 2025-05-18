@@ -201,20 +201,20 @@ export default Circle_Status;
 
 ### 通用
 
-|    参数     |                    类型                    |      说明      |   默认值    |
-| :---------: | :----------------------------------------: | :------------: | :---------: | ------ |
-|    type     |                   `line`                   |    `circle`    | 进度条类型  | `line` |
-|   percent   |                  `number`                  |   进度条数值   |      0      |
-|   format    |    `(percent?:number)=>React.ReactNode`    | 格式化进度数字 | `undefined` |
-|    size     |             `default`\|`small`             |  进度条的大小  |  `default`  |
-| strokeWidth |                  `number`                  |  进度条的宽度  |      6      |
-|  showInfo   |                 `boolean`                  | 是否显示进度值 |   `true`    |
-|   status    | `normal`\|`exception`\|`active`\|`success` | 当前进度的状态 |  `normal`   |
+|    参数     |                       类型                       |      说明      |   默认值    |
+| :---------: | :----------------------------------------------: | :------------: | :---------: |
+|    type     |                `line` \| `circle`                |   进度条类型   |   `line`    |
+|   percent   |                     `number`                     |   进度条数值   |      0      |
+|   format    |       `(percent?:number)=>React.ReactNode`       | 格式化进度数字 | `undefined` |
+|    size     |               `default` \| `small`               |  进度条的大小  |  `default`  |
+| strokeWidth |                     `number`                     |  进度条的宽度  |      6      |
+|  showInfo   |                    `boolean`                     | 是否显示进度值 |   `true`    |
+|   status    | `normal` \| `exception` \| `active` \| `success` | 当前进度的状态 |  `normal`   |
 
 ### line 型组件
 
-|     参数      |   类型   |       说明       |   默认值    |
-| :-----------: | :------: | :--------------: | :---------: | -------------- | ------ |
-| strokeLinecap |  `butt`  |     `square`     |   `round`   | 进度条边缘形状 | `butt` |
-|  trailColor   | `string` |  进度条尾部颜色  | `undefined` |
-|     steps     | `number` | 步骤进度条的步数 | `undefined` |
+|     参数      |             类型              |       说明       |   默认值    |
+| :-----------: | :---------------------------: | :--------------: | :---------: |
+| strokeLinecap | `butt` \| `square` \| `round` |  进度条边缘形状  |   `butt`    |
+|  trailColor   |           `string`            |  进度条尾部颜色  | `undefined` |
+|     steps     |           `number`            | 步骤进度条的步数 | `undefined` |
