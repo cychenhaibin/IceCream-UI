@@ -26,14 +26,18 @@ const IconDemo = () => {
       });
   };
 
+  const demo = () => {
+    alert('这是你可以设置的函数');
+  };
+
   return (
     <div className="icon-demo">
       <div className="icon-demo-row">
         <div className="icon-demo-item" onClick={() => handleCopy('icon_settings')}>
           <div className="icon-demo-icon">
-            <Icon name="icon_settings"></Icon>
+            <Icon name="icon_settings" onClick={demo}></Icon>
           </div>
-          <div className="icon-demo-name">settings</div>
+          <div className="icon-demo-name">setting</div>
         </div>
         <div className="icon-demo-item" onClick={() => handleCopy('icon-edit')}>
           <div className="icon-demo-icon">
