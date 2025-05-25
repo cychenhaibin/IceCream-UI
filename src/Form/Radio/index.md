@@ -161,31 +161,31 @@ export default () => {
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| checked | 指定当前是否选中 | boolean | - |
-| defaultChecked | 初始是否选中 | boolean | false |
-| disabled | 禁用 Radio | boolean | false |
-| readOnly | 只读 Radio | boolean | false |
-| value | 根据 value 进行比较，判断是否选中 | string \| number | - |
-| size | 单选框大小 | 'small' \| 'default' \| 'large' | 'default' |
-| onChange | 变化时回调函数 | (value: string \| number) => void | - |
+| checked | 指定当前是否选中 | `boolean` | - |
+| defaultChecked | 初始是否选中 | `boolean` | false |
+| disabled | 禁用 Radio | `boolean` | false |
+| readOnly | 只读 Radio | `boolean` | false |
+| value | 根据 value 进行比较，判断是否选中 | `string` \| `number` | - |
+| size | 单选框大小 | `small` \| `default` \| `large` | default |
+| onChange | 变化时回调函数 | `(value: string \| number) => void` | - |
 
 ### Radio.Group
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| defaultValue | 默认选中的值 | string \| number | - |
-| disabled | 禁用所有单选框 | boolean | false |
-| readOnly | 只读所有单选框 | boolean | false |
-| name | RadioGroup 下所有 input 的 name 属性 | string | - |
-| options | 指定可选项 | Array<{ label: string; value: string \| number; disabled?: boolean }> | - |
-| size | 单选框大小 | 'small' \| 'default' \| 'large' | 'default' |
-| value | 用于设置当前选中的值 | string \| number | - |
-| onChange | 选项变化时的回调函数 | (value: string \| number) => void | - |
-| direction | 排列方向 | 'horizontal' \| 'vertical' | 'horizontal' |
+| defaultValue | 默认选中的值 | `string` \| `number` | - |
+| disabled | 禁用所有单选框 | `boolean` | false |
+| readOnly | 只读所有单选框 | `boolean` | false |
+| name | RadioGroup 下所有 input 的 name 属性 | `string` | - |
+| options | 指定可选项 | `Array<{ label: string; value: string \| number; disabled?: boolean }>` | - |
+| size | 单选框大小 | `small` \| `default` \| `large` | default |
+| value | 用于设置当前选中的值 | `string` \| `number` | - |
+| onChange | 选项变化时的回调函数 | `(value: string \| number) => void` | - |
+| direction | 排列方向 | `horizontal` \| `vertical` | `horizontal` |
 
 ## 注意事项
 
-1. Radio 组件支持受控和非受控两种模式
-2. RadioGroup 中的 Radio 会自动继承 RadioGroup 的 disabled、readOnly 和 size 属性
-3. 当使用 options 属性时，RadioGroup 会自动渲染选项，不需要手动添加 Radio 子组件
-4. 垂直布局时，RadioGroup 会自动调整间距，确保选项之间有合适的间隔
+1. `Radio` 组件支持受控和非受控两种模式
+2. `RadioGroup` 中的 `Radio` 会自动继承 `RadioGroup` 的 `disabled`、`readOnly` 和 `size` 属性
+3. 当使用 `options` 属性时，`RadioGroup` 会自动渲染选项，不需要手动添加 `Radio` 子组件
+4. 垂直布局时，`RadioGroup` 会自动调整间距，确保选项之间有合适的间隔
