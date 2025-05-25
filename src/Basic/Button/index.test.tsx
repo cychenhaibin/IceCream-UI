@@ -70,33 +70,6 @@ describe('Button 组件测试', () => {
     expect(screen.getByText((c) => c.includes('带图标的按钮'))).toBeInTheDocument();
   });
 
-  it('根据订单类型渲染正确文本', () => {
-    const { rerender } = renderWithContext(
-      <Button ordertype={1} {...defaultProps}>
-        按钮
-      </Button>,
-    );
-    expect(screen.getByText((c) => c.includes('已完成'))).toBeInTheDocument();
-
-    rerender(
-      <ConfigContext.Provider value={mockConfigContext}>
-        <Button ordertype={2} {...defaultProps}>
-          按钮
-        </Button>
-      </ConfigContext.Provider>,
-    );
-    expect(screen.getByText((c) => c.includes('已超时'))).toBeInTheDocument();
-
-    rerender(
-      <ConfigContext.Provider value={mockConfigContext}>
-        <Button ordertype={3} {...defaultProps}>
-          按钮
-        </Button>
-      </ConfigContext.Provider>,
-    );
-    expect(screen.getByText((c) => c.includes('未完成'))).toBeInTheDocument();
-  });
-
   it('应用自定义类名', () => {
     renderWithContext(
       <Button className="custom-class" {...defaultProps}>

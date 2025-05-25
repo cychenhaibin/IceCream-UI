@@ -13,9 +13,11 @@ interface ButtonProps {
   style?: object;
   ordertype?: number;
   onClick?: MouseEventHandler<HTMLDivElement>;
+  withBg?: boolean;
 }
 export default (props: ButtonProps) => {
-  const { type, disabled, icon, text, children, className, style, onClick, ordertype } = props;
+  const { type, disabled, icon, text, children, className, style, onClick, ordertype, withBg } =
+    props;
   // const prefix = 'IceCream-UI'
   const { prefix } = useContext(ConfigContext);
   const btnPrefix = prefix + '-btn';
@@ -24,6 +26,7 @@ export default (props: ButtonProps) => {
     {
       [`${btnPrefix}-highlight`]: type === 'highlight',
       [`${btnPrefix}-disabled`]: disabled,
+      [`${btnPrefix}-with-bg`]: withBg,
     },
     className,
   );
@@ -50,8 +53,8 @@ export default (props: ButtonProps) => {
       }}
     >
       {icon}
-      {/* {text} */}
-      {getTextByOrderType()}
+      {text}
+      {/* {getTextByOrderType()} */}
       {children}
     </div>
   );

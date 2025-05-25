@@ -5,14 +5,27 @@
 ### 新增
 
 - Progress 组件 ([@cychenhaibin](https://cychenhaibin.github.com), 2025-05-18)
+
   - 支持 line 和 circle 两种类型
   - 支持不同状态：normal、active、exception、success
   - 支持自定义颜色和大小
   - 支持步骤进度条
 
+- Radio 组件 ([@cychenhaibin](https://cychenhaibin.github.com), 2025-05-26)
+  - 支持单选和单选组
+  - 支持自定义样式和大小
+  - 支持禁用状态
+  - 支持自定义图标
+  - 支持事件回调
+  - 支持受控和非受控模式
+
 ### 变更
 
 - 优化项目目录结构 ([@cychenhaibin](https://cychenhaibin.github.com), 2025-04-20)
+- Button 组件 ([@cychenhaibin](https://cychenhaibin.github.com), 2025-05-26)
+  - 新增 withBg 属性，支持自定义背景色显示
+  - 优化按钮悬停效果
+  - 更新组件文档和示例
 
 ### 修复
 

@@ -17,6 +17,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - 优化项目目录结构 (@cychenhaibin, 2025-04-20)
+- Button 组件 (@cychenhaibin, 2025-05-26)
+  - 新增 withBg 属性，支持自定义背景色显示
+  - 优化按钮悬停效果
+  - 更新组件文档
 
 ### Fixed
 

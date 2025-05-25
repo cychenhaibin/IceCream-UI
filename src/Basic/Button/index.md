@@ -32,6 +32,7 @@ export default () => {
   return (
     <div style={{ display: 'flex', gap: '20px' }}>
       <Button>默认按钮</Button>
+      <Button withBg>带背景色按钮</Button>
       <Button type="highlight">高亮按钮</Button>
     </div>
   );
@@ -61,11 +62,16 @@ export default () => {
 
 ```tsx
 import React from 'react';
-import { Button } from 'IceCream-UI';
+import { Button, Icon } from 'IceCream-UI';
 import './index.less';
 
 export default () => {
-  return <Button icon={<span>🚀</span>}>带图标的按钮</Button>;
+  return (
+    <div style={{ display: 'flex', gap: '20px' }}>
+      <Button icon={<Icon name="search" size={14} />}>搜索</Button>
+      <Button icon={<Icon name="icon_bin" size={14} />}>添加</Button>
+    </div>
+  );
 };
 ```
 
@@ -79,6 +85,7 @@ export default () => {
 | text      | 按钮文本             | `string`                      | -         |
 | className | 自定义类名           | `string`                      | -         |
 | style     | 自定义样式           | `object`                      | -         |
+| withBg    | 是否显示背景色       | `boolean`                     | `false`   |
 | onClick   | 点击按钮时的回调函数 | `(event: MouseEvent) => void` | -         |
 
 More skills for writing demo: https://d.umijs.org/guide/basic#write-component-demo

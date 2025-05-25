@@ -9,3 +9,4 @@ export { default as Dialog } from './Feedback/Dialog';
 export { default as Tree } from './Data/Tree';
 export { default as Icon } from './General/Icon';
 export { default as Progress } from './Data/Progress';
+export { default as Radio } from './Form/Radio';
