@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox renders correctly 1`] = `
+<label
+  class="ice-checkbox"
+>
+  <span
+    class="ice-checkbox-wrapper"
+  >
+    <input
+      class="ice-checkbox-input"
+      type="checkbox"
+      value=""
+    />
+    <span
+      class="ice-checkbox-inner"
+    />
+  </span>
+  <span
+    class="ice-checkbox-label"
+  >
+    Checkbox
+  </span>
+</label>
+`;
+
+exports[`Checkbox.Group renders correctly 1`] = `
+<div
+  class="ice-checkbox-group ice-checkbox-group-horizontal"
+  role="group"
+>
+  <label
+    class="ice-checkbox"
+  >
+    <span
+      class="ice-checkbox-wrapper"
+    >
+      <input
+        class="ice-checkbox-input"
+        type="checkbox"
+        value="1"
+      />
+      <span
+        class="ice-checkbox-inner"
+      />
+    </span>
+    <span
+      class="ice-checkbox-label"
+    >
+      Option 1
+    </span>
+  </label>
+  <label
+    class="ice-checkbox"
+  >
+    <span
+      class="ice-checkbox-wrapper"
+    >
+      <input
+        class="ice-checkbox-input"
+        type="checkbox"
+        value="2"
+      />
+      <span
+        class="ice-checkbox-inner"
+      />
+    </span>
+    <span
+      class="ice-checkbox-label"
+    >
+      Option 2
+    </span>
+  </label>
+</div>
+`;
