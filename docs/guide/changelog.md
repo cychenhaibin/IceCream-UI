@@ -12,6 +12,7 @@
   - 支持步骤进度条
 
 - Radio 组件 ([@cychenhaibin](https://cychenhaibin.github.com), 2025-05-26)
+
   - 支持单选和单选组
   - 支持自定义样式和大小
   - 支持禁用状态
@@ -19,17 +20,35 @@
   - 支持事件回调
   - 支持受控和非受控模式
 
+- Checkbox 组件 ([@cychenhaibin](https://cychenhaibin.github.com), 2025-05-26)
+  - 支持基础复选框功能
+  - 支持禁用状态
+  - 支持只读状态
+  - 支持默认选中状态
+  - 支持自定义大小（small、default、large）
+  - 支持复选框组（Checkbox.Group）
+  - 支持垂直布局
+  - 支持自定义选项配置
+
 ### 变更
 
 - 优化项目目录结构 ([@cychenhaibin](https://cychenhaibin.github.com), 2025-04-20)
 - Button 组件 ([@cychenhaibin](https://cychenhaibin.github.com), 2025-05-26)
+
   - 新增 withBg 属性，支持自定义背景色显示
   - 优化按钮悬停效果
   - 更新组件文档和示例
 
+- Checkbox 组件样式优化 ([@cychenhaibin](https://cychenhaibin.github.com), 2025-05-26)
+  - 优化选中状态的视觉样式，使用白色对勾
+  - 优化只读状态的样式，未选中时显示为禁用样式，选中时显示为蓝色样式
+  - 优化交互反馈效果
+
 ### 修复
 
 - 修复目录结构问题 ([@cychenhaibin](https://cychenhaibin.github.com), 2025-04-20)
+- 修复 Checkbox 组件 defaultChecked 属性不生效的问题 ([@cychenhaibin](https://cychenhaibin.github.com), 2025-05-26)
+- 修复 Checkbox 组件测试用例中的断言函数缺失问题 ([@cychenhaibin](https://cychenhaibin.github.com), 2025-05-26)
 
 ## 历史版本
 

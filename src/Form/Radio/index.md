@@ -33,9 +33,9 @@ import { Radio } from 'IceCream-UI';
 export default () => {
   return (
     <Radio.Group defaultValue="1">
-      <Radio value="1">Option1</Radio>
-      <Radio value="2">Option2</Radio>
-      <Radio value="3">Option3</Radio>
+      <Radio value="1">Option 1</Radio>
+      <Radio value="2">Option 2</Radio>
+      <Radio value="3">Option 3</Radio>
     </Radio.Group>
   );
 };
@@ -52,9 +52,9 @@ import { Radio } from 'IceCream-UI';
 export default () => {
   return (
     <Radio.Group defaultValue="1" direction="vertical">
-      <Radio value="1">Option1</Radio>
-      <Radio value="2">Option2</Radio>
-      <Radio value="3">Option3</Radio>
+      <Radio value="1">Option 1</Radio>
+      <Radio value="2">Option 2</Radio>
+      <Radio value="3">Option 3</Radio>
     </Radio.Group>
   );
 };
@@ -73,8 +73,8 @@ export default () => {
     <>
       <Radio disabled>disabled</Radio>
       <Radio.Group disabled defaultValue="1">
-        <Radio value="1">Option1</Radio>
-        <Radio value="2">Option2</Radio>
+        <Radio value="1">Option 1</Radio>
+        <Radio value="2">Option 2</Radio>
       </Radio.Group>
     </>
   );
@@ -94,8 +94,8 @@ export default () => {
     <>
       <Radio readOnly>onlyRead</Radio>
       <Radio.Group readOnly defaultValue="1">
-        <Radio value="1">Option1</Radio>
-        <Radio value="2">Option2</Radio>
+        <Radio value="1">Option 1</Radio>
+        <Radio value="2">Option 2</Radio>
       </Radio.Group>
     </>
   );
@@ -115,20 +115,20 @@ export default () => {
     <div>
       <div>
         <Radio.Group size="small" defaultValue="1">
-          <Radio value="1">Option1</Radio>
-          <Radio value="2">Option2</Radio>
+          <Radio value="1">Option 1</Radio>
+          <Radio value="2">Option 2</Radio>
         </Radio.Group>
       </div>
       <div style={{ marginTop: 16 }}>
         <Radio.Group defaultValue="1">
-          <Radio value="1">Option1</Radio>
-          <Radio value="2">Option2</Radio>
+          <Radio value="1">Option 1</Radio>
+          <Radio value="2">Option 2</Radio>
         </Radio.Group>
       </div>
       <div style={{ marginTop: 16 }}>
         <Radio.Group size="large" defaultValue="1">
-          <Radio value="1">Option1</Radio>
-          <Radio value="2">Option2</Radio>
+          <Radio value="1">Option 1</Radio>
+          <Radio value="2">Option 2</Radio>
         </Radio.Group>
       </div>
     </div>
@@ -146,9 +146,9 @@ import { Radio } from 'IceCream-UI';
 
 export default () => {
   const options = [
-    { label: 'Option1', value: '1' },
-    { label: 'Option2', value: '2' },
-    { label: 'Option3', value: '3', disabled: true },
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+    { label: 'Option 3', value: '3', disabled: true },
   ];
 
   return <Radio.Group options={options} defaultValue="1" />;
