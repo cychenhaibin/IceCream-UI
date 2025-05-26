@@ -73,7 +73,9 @@ export default () => (
   <>
     <Checkbox size="small">Small</Checkbox>
     <Checkbox>Default</Checkbox>
-    <Checkbox size="large">Large</Checkbox>
+    <Checkbox size="large" checked>
+      Large
+    </Checkbox>
   </>
 );
 ```
@@ -86,7 +88,9 @@ import { Checkbox } from 'IceCream-UI';
 
 export default () => (
   <Checkbox.Group>
-    <Checkbox value="1">Option 1</Checkbox>
+    <Checkbox value="1" checked>
+      Option 1
+    </Checkbox>
     <Checkbox value="2">Option 2</Checkbox>
     <Checkbox value="3">Option 3</Checkbox>
   </Checkbox.Group>
@@ -101,7 +105,9 @@ import { Checkbox } from 'IceCream-UI';
 
 export default () => (
   <Checkbox.Group direction="vertical">
-    <Checkbox value="1">Option 1</Checkbox>
+    <Checkbox value="1" checked>
+      Option 1
+    </Checkbox>
     <Checkbox value="2">Option 2</Checkbox>
     <Checkbox value="3">Option 3</Checkbox>
   </Checkbox.Group>
@@ -118,7 +124,7 @@ export default () => {
   const options = [
     { label: 'Option 1', value: '1' },
     { label: 'Option 2', value: '2' },
-    { label: 'Option 3', value: '3' },
+    { label: 'Option 3', value: '3', checked },
   ];
 
   return <Checkbox.Group options={options} />;
