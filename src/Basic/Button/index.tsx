@@ -4,7 +4,8 @@ import cs from 'classnames';
 import { ConfigContext } from '../../ConfigProvider';
 
 interface ButtonProps {
-  type?: 'highlight' | 'default';
+  type?: 'highlight' | 'default' | 'primary' | 'danger' | 'ghost' | 'link' | 'text';
+  size?: 'large' | 'default' | 'small';
   disabled?: boolean;
   icon?: ReactNode;
   text?: string;
@@ -15,9 +16,21 @@ interface ButtonProps {
   onClick?: MouseEventHandler<HTMLDivElement>;
   withBg?: boolean;
 }
+
 export default (props: ButtonProps) => {
-  const { type, disabled, icon, text, children, className, style, onClick, ordertype, withBg } =
-    props;
+  const {
+    type,
+    size,
+    disabled,
+    icon,
+    text,
+    children,
+    className,
+    style,
+    onClick,
+    ordertype,
+    withBg,
+  } = props;
   // const prefix = 'IceCream-UI'
   const { prefix } = useContext(ConfigContext);
   const btnPrefix = prefix + '-btn';
@@ -25,8 +38,14 @@ export default (props: ButtonProps) => {
     btnPrefix,
     {
       [`${btnPrefix}-highlight`]: type === 'highlight',
+      [`${btnPrefix}-primary`]: type === 'primary',
+      [`${btnPrefix}-danger`]: type === 'danger',
+      [`${btnPrefix}-ghost`]: type === 'ghost',
+      [`${btnPrefix}-link`]: type === 'link',
+      [`${btnPrefix}-text`]: type === 'text',
       [`${btnPrefix}-disabled`]: disabled,
       [`${btnPrefix}-with-bg`]: withBg,
+      [`${btnPrefix}-${size}`]: size && size !== 'default',
     },
     className,
   );

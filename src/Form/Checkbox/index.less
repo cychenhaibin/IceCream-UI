@@ -9,6 +9,7 @@
   font-size: @IceCream-UI-font-size-base;
   line-height: 1.5715;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   &:last-child {
     margin-right: 0;
@@ -127,8 +128,8 @@
 
     &.ice-checkbox-checked {
       .ice-checkbox-inner {
-        background-color: @IceCream-UI-primary-hover-color;
-        border-color: @IceCream-UI-primary-hover-color;
+        background-color: rgba(@IceCream-UI-primary-color, 0.6);
+        border-color: rgba(@IceCream-UI-primary-color, 0.1);
 
         &::after {
           transform: rotate(45deg) scale(1);
