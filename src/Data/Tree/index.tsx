@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import classNames from 'classnames';
 import Icon from '../../General/Icon';
+import Checkbox from '../../Form/Checkbox';
 import './index.less';
 
 export interface TreeNode {
@@ -495,21 +496,10 @@ const Tree: React.FC<TreeProps> = ({
       'ice-tree-node-drag-over-bottom': isDragOver && dropPosition === 1,
     });
 
-    const checkboxClasses = classNames('ice-tree-checkbox', {
-      'ice-tree-checkbox-checked': isChecked,
-      'ice-tree-checkbox-disabled': disabled,
-    });
-
     const handleNodeClick = (e: React.MouseEvent) => {
       e.stopPropagation();
       if (disabled) return;
       handleSelect(node);
-    };
-
-    const handleCheckboxClick = (e: React.MouseEvent) => {
-      e.stopPropagation();
-      if (disabled) return;
-      handleCheck(node);
     };
 
     return (
@@ -532,9 +522,15 @@ const Tree: React.FC<TreeProps> = ({
           )}
         </span>
         {checkable && nodeCheckable !== false && (
-          <span className={checkboxClasses} onClick={handleCheckboxClick}>
-            {isChecked && <Icon name="icon_check" size={16} />}
-          </span>
+          <Checkbox
+            checked={isChecked}
+            disabled={disabled}
+            onChange={(checked) => {
+              if (!disabled) {
+                handleCheck(node);
+              }
+            }}
+          />
         )}
         <span className="ice-tree-node-content" onClick={handleNodeClick}>
           {title}

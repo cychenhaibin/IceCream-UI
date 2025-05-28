@@ -1,10 +1,10 @@
-@import '../../styles/variables.less';
+@import '../../styles/common.less';
 
 .ice-tree {
   position: relative;
   width: 50%;
-  color: @text-color;
-  font-size: 14px;
+  color: @IceCream-UI-text-color-primary;
+  font-size: @IceCream-UI-font-size-base;
   line-height: 1.5;
 
   .ice-tree-node {
@@ -13,25 +13,24 @@
     width: 100%;
     padding: 4px 0;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all @IceCream-UI-animation-duration-base;
 
     &:hover {
-      background-color: @item-hover-bg;
+      background-color: @IceCream-UI-default-bg;
     }
 
     &.ice-tree-node-disabled {
-      color: @disabled-color;
+      color: @IceCream-UI-disabled-color;
       cursor: not-allowed;
     }
 
     &.ice-tree-node-selected {
       position: relative;
       z-index: 1;
-      width: calc(100% + 24px);
-      margin-left: -24px;
+      width: 100%;
       padding-left: 24px;
-      color: @primary-color;
-      background-color: rgba(24, 144, 255, 0.1);
+      color: @IceCream-UI-primary-color;
+      background-color: @IceCream-UI-primary-bg;
     }
 
     .ice-tree-node-indent {
@@ -57,54 +56,14 @@
       }
     }
 
-    .ice-tree-checkbox {
+    .ice-checkbox {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       width: 16px;
       height: 16px;
-      margin-top: -2px;
-      margin-right: 8px;
+      margin: 4px 8px 4px 0;
       vertical-align: middle;
-      background-color: #fff;
-      border: 1px solid #d9d9d9;
-      border-radius: 2px;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:hover {
-        border-color: @primary-color;
-      }
-
-      &.ice-tree-checkbox-checked {
-        background-color: @primary-color;
-        border-color: @primary-color;
-
-        .ice-icon {
-          color: #fff;
-          font-size: 12px;
-        }
-      }
-
-      &.ice-tree-checkbox-disabled {
-        background-color: #f5f5f5;
-        border-color: #d9d9d9;
-        cursor: not-allowed;
-        opacity: 0.5;
-
-        &:hover {
-          border-color: #d9d9d9;
-        }
-
-        &.ice-tree-checkbox-checked {
-          background-color: #f5f5f5;
-          border-color: #d9d9d9;
-
-          .ice-icon {
-            color: rgba(0, 0, 0, 0.25);
-          }
-        }
-      }
     }
 
     .ice-tree-node-content {
@@ -116,7 +75,7 @@
     .ice-tree-loading-icon {
       display: inline-block;
       margin-left: 8px;
-      color: @primary-color;
+      color: @IceCream-UI-primary-color;
       animation: loading 1s infinite linear;
     }
 
@@ -129,7 +88,7 @@
 
     &-drag-over {
       position: relative;
-      background-color: rgba(24, 144, 255, 0.1);
+      background-color: @IceCream-UI-primary-bg;
 
       &::before {
         position: absolute;
@@ -137,7 +96,7 @@
         left: 0;
         z-index: 1;
         height: 2px;
-        background-color: @primary-color;
+        background-color: @IceCream-UI-primary-color;
         content: '';
       }
 

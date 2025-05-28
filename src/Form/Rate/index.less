@@ -1,3 +1,5 @@
+@import '../../styles/common.less';
+
 .ice-rate {
   display: inline-flex;
   align-items: center;
@@ -5,14 +7,17 @@
   line-height: 1;
 
   &-items {
-    display: inline-flex;
     position: relative;
+    display: inline-flex;
   }
 
   &-item {
     position: relative;
-    transition: transform 0.15s ease-in-out;
-    margin-right: 8px;
+    margin-right: @IceCream-UI-padding-sm;
+
+    // 未选中状态
+    color: @IceCream-UI-disabled-bg;
+    transition: transform @IceCream-UI-animation-duration-fast ease-in-out;
 
     &:last-child {
       margin-right: 0;
@@ -23,12 +28,9 @@
       transform: scale(1.1);
     }
 
-    // 未选中状态
-    color: #E8E8E8;
-
     // 选中状态
     &-active {
-      color: #F7BA2A;
+      color: @IceCream-UI-warning-color;
     }
 
     // 半选状态
@@ -36,29 +38,29 @@
       position: relative;
 
       &::after {
-        content: '';
         position: absolute;
-        left: 50%;
         top: 0;
         bottom: 0;
+        left: 50%;
         width: 50%;
-        background-color: #fff;
+        background-color: @IceCream-UI-default-bg;
         mix-blend-mode: color;
+        content: '';
       }
     }
   }
 
   &-text {
-    margin-left: 8px;
-    font-size: 14px;
-    color: #909399;
+    margin-left: @IceCream-UI-padding-sm;
+    color: @IceCream-UI-text-color-secondary;
+    font-size: @IceCream-UI-font-size-base;
   }
 
   &-small {
-    font-size: 16px;
+    font-size: @IceCream-UI-font-size-lg;
 
     .ice-rate-text {
-      font-size: 12px;
+      font-size: @IceCream-UI-font-size-sm;
     }
   }
 
@@ -66,7 +68,7 @@
     font-size: 24px;
 
     .ice-rate-text {
-      font-size: 16px;
+      font-size: @IceCream-UI-font-size-lg;
     }
   }
 

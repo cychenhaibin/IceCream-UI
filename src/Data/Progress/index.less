@@ -1,13 +1,13 @@
-@import '../../styles/variables.less';
+@import '../../styles/common.less';
 
-@font-size-base: 14px;
-@progress-remaining-color: #f5f5f5;
-@progress-radius: 100px;
-@progress-default-color: @primary-color;
-@primary: @primary-color;
-@danger: @error-color;
-@success: @success-color;
-@gray-900: #262626;
+@font-size-base: @IceCream-UI-font-size-base;
+@progress-remaining-color: @IceCream-UI-disabled-bg;
+@progress-radius: @IceCream-UI-border-radius-base;
+@progress-default-color: @IceCream-UI-primary-color;
+@primary: @IceCream-UI-primary-color;
+@danger: @IceCream-UI-error-color;
+@success: @IceCream-UI-success-color;
+@gray-900: @IceCream-UI-text-color-primary;
 
 @progress-prefix: ~'ci-pg';
 @progress-ani-prefix: ~'ci-pg-ani';
@@ -16,8 +16,8 @@
   &-text {
     display: inline-block;
     width: 2em;
-    margin-left: 8px;
-    font-size: @font-size-base;
+    margin-left: @IceCream-UI-padding-sm;
+    font-size: @IceCream-UI-font-size-base;
     line-height: 1;
     white-space: nowrap;
     text-align: left;
@@ -26,7 +26,7 @@
   }
 
   &-line {
-    font-size: @font-size-base;
+    font-size: @IceCream-UI-font-size-base;
   }
 
   &-outer {
@@ -47,18 +47,18 @@
     width: 100%;
     overflow: hidden;
     vertical-align: middle;
-    background-color: @progress-remaining-color;
-    border-radius: @progress-radius;
+    background-color: @IceCream-UI-disabled-bg;
+    border-radius: @IceCream-UI-border-radius-base;
 
     .@{progress-prefix}-circle-path {
-      stroke: @primary;
+      stroke: @IceCream-UI-primary-color;
     }
   }
 
   &-bg {
     position: relative;
-    background-color: @progress-default-color;
-    border-radius: @progress-radius;
+    background-color: @IceCream-UI-primary-color;
+    border-radius: @IceCream-UI-border-radius-base;
     transition: all 0.4s 0s;
   }
 
@@ -67,8 +67,8 @@
       .@{progress-prefix}-bg::before {
         position: absolute;
         z-index: 1;
-        background-color: @gray-900;
-        border-radius: 100px;
+        background-color: @IceCream-UI-text-color-primary;
+        border-radius: @IceCream-UI-border-radius-base;
         opacity: 0;
         animation: ci-pg-ani-active 1.5s infinite;
         content: '';
@@ -78,27 +78,27 @@
 
     &-exception {
       .@{progress-prefix}-bg {
-        background-color: @danger;
+        background-color: @IceCream-UI-error-color;
       }
     }
 
     &-success {
       .@{progress-prefix}-bg {
-        background-color: @success;
+        background-color: @IceCream-UI-success-color;
       }
     }
   }
 
   &-circle {
     &-trail {
-      stroke: @progress-remaining-color;
+      stroke: @IceCream-UI-disabled-bg;
     }
   }
 
   &-circle .@{progress-prefix}-inner {
     position: relative;
     line-height: 1;
-    background-color: #fff;
+    background-color: @IceCream-UI-default-bg;
   }
 
   &-circle .@{progress-prefix}-text {
@@ -127,11 +127,11 @@
       flex-shrink: 0;
       min-width: 2px;
       margin-right: 2px;
-      background: #f3f3f3;
-      transition: all 0.3s;
+      background: @IceCream-UI-disabled-bg;
+      transition: all @IceCream-UI-animation-duration-base;
 
       &-active {
-        background: @progress-default-color;
+        background: @IceCream-UI-primary-color;
       }
     }
   }

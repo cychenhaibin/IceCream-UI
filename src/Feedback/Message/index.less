@@ -1,4 +1,4 @@
-@import '../../styles/variables.less';
+@import '../../styles/common.less';
 
 @prefix: 'IceCream-UI';
 @messagePrefix: ~'@{prefix}-message';
@@ -8,69 +8,70 @@
   position: fixed;
   top: 20px;
   left: 50%;
-  z-index: 1000;
+  z-index: @IceCream-UI-zindex-modal;
   display: flex;
   align-items: center;
-  padding: 12px 24px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: @IceCream-UI-padding-base @IceCream-UI-padding-lg;
+  border-radius: @IceCream-UI-border-radius-lg;
+  box-shadow: @IceCream-UI-box-shadow-lg;
   transform: translateX(-50%);
   backdrop-filter: blur(8px);
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  animation: messageSlideIn 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all @IceCream-UI-animation-duration-base cubic-bezier(0.645, 0.045, 0.355, 1);
+  animation: messageSlideIn @IceCream-UI-animation-duration-base
+    cubic-bezier(0.645, 0.045, 0.355, 1);
 
   &-content {
     display: flex;
     align-items: center;
     font-weight: normal;
-    font-size: 14px;
+    font-size: @IceCream-UI-font-size-base;
     line-height: 1.5;
   }
 
   &-success {
-    color: @success-color;
-    background-color: @success-bg;
-    border: 1px solid @success-border;
+    color: @IceCream-UI-success-color;
+    background-color: @IceCream-UI-success-bg;
+    border: 1px solid @IceCream-UI-success-border-color;
 
     &:hover {
-      background-color: @success-hover-bg;
-      box-shadow: 0 6px 16px @success-shadow;
+      background-color: @IceCream-UI-success-hover-bg-alpha;
+      box-shadow: 0 6px 16px @IceCream-UI-success-shadow-alpha;
       transform: translate(-50%, -2px);
     }
   }
 
   &-warning {
-    color: @warning-color;
-    background-color: @warning-bg;
-    border: 1px solid @warning-border;
+    color: @IceCream-UI-warning-color;
+    background-color: @IceCream-UI-warning-bg;
+    border: 1px solid @IceCream-UI-warning-border-color;
 
     &:hover {
-      background-color: @warning-hover-bg;
-      box-shadow: 0 6px 16px @warning-shadow;
+      background-color: @IceCream-UI-warning-hover-bg-alpha;
+      box-shadow: 0 6px 16px @IceCream-UI-warning-shadow-alpha;
       transform: translate(-50%, -2px);
     }
   }
 
   &-error {
-    color: @error-color;
-    background-color: @error-bg;
-    border: 1px solid @error-border;
+    color: @IceCream-UI-error-color;
+    background-color: @IceCream-UI-error-bg;
+    border: 1px solid @IceCream-UI-error-border-color;
 
     &:hover {
-      background-color: @error-hover-bg;
-      box-shadow: 0 6px 16px @error-shadow;
+      background-color: @IceCream-UI-error-hover-bg-alpha;
+      box-shadow: 0 6px 16px @IceCream-UI-error-shadow-alpha;
       transform: translate(-50%, -2px);
     }
   }
 
   &-info {
-    color: @info-color;
-    background-color: @info-bg;
-    border: 1px solid @info-border;
+    color: @IceCream-UI-info-color;
+    background-color: @IceCream-UI-info-bg;
+    border: 1px solid @IceCream-UI-info-border-color;
 
     &:hover {
-      background-color: @info-hover-bg;
-      box-shadow: 0 6px 16px @info-shadow;
+      background-color: @IceCream-UI-info-hover-bg-alpha;
+      box-shadow: 0 6px 16px @IceCream-UI-info-shadow-alpha;
       transform: translate(-50%, -2px);
     }
   }
@@ -84,8 +85,8 @@
   }
 
   &-button {
-    padding: 8px 16px;
-    border: 1px solid #d9d9d9;
+    padding: 10px 16px;
+    border: 1px solid @IceCream-UI-disabled-border-color;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s;
@@ -96,27 +97,27 @@
   }
 
   &-success {
-    color: @success-color;
-    background: @demo-success-bg;
-    border-color: @demo-success-border;
+    color: @IceCream-UI-success-color;
+    background: @IceCream-UI-success-bg;
+    border-color: @IceCream-UI-success-border-color;
   }
 
   &-error {
-    color: @error-color;
-    background: @demo-error-bg;
-    border-color: @demo-error-border;
+    color: @IceCream-UI-error-color;
+    background: @IceCream-UI-error-bg;
+    border-color: @IceCream-UI-error-border-color;
   }
 
   &-warning {
-    color: @warning-color;
-    background: @demo-warning-bg;
-    border-color: @demo-warning-border;
+    color: @IceCream-UI-warning-color;
+    background: @IceCream-UI-warning-bg;
+    border-color: @IceCream-UI-warning-border-color;
   }
 
   &-info {
-    color: @info-color;
-    background: @demo-info-bg;
-    border-color: @demo-info-border;
+    color: @IceCream-UI-info-color;
+    background: @IceCream-UI-info-bg;
+    border-color: @IceCream-UI-info-border-color;
   }
 }
 
