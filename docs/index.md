@@ -19,18 +19,18 @@ IceCream-UI 是一个基于 React 的 UI 组件库，提供了一系列高质量
 
 我们提供了一系列常用的组件：
 
-- [Button 按钮](../src/Basic/Button/index.md)
-- [Progress 进度条](../src/Data/Progress/index.md)
-- [Tree 树形控件](../src/Data/Tree/index.md)
-- [Dialog 对话框](../src/Feedback/Dialog/index.md)
-- [Message 消息提示](../src/Feedback/Message/index.md)
-- [Tooltip 文字提示](../src/Feedback/Tooltip/index.md)
-- [Checkbox 复选框](../src/Form/Checkbox/index.md)
-- [Input 输入框](../src/Form/Input/index.md)
-- [InputTag 标签输入框](../src/Form/InputTag/index.md)
-- [Radio 单选框](../src/Form/Radio/index.md)
-- [Rate 评分](../src/Form/Rate/index.md)
-- [Icon 图标](../src/General/Icon/index.md)
+- [Button 按钮](./basic/button)
+- [Progress 进度条](./data/progress)
+- [Tree 树形控件](./data/tree)
+- [Dialog 对话框](./feedback/dialog)
+- [Message 消息提示](./feedback/message)
+- [Tooltip 文字提示](./feedback/tooltip)
+- [Checkbox 复选框](./form/checkbox)
+- [Input 输入框](./form/input)
+- [InputTag 标签输入框](./form/input-tag)
+- [Radio 单选框](./form/radio)
+- [Rate 评分](./form/rate)
+- [Icon 图标](./general/icon)
 - 更多组件正在开发中...
 
 ## 🤝 贡献
