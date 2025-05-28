@@ -33,7 +33,7 @@ import { Tooltip, Button } from 'IceCream-UI';
 
 export default () => {
   return (
-    <div style={{ display: 'flex', gap: '20px' }}>
+    <div style={{ width: '100%', display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
       <Tooltip title="上边提示" placement="top">
         <Button>上边</Button>
       </Tooltip>
@@ -47,8 +47,8 @@ export default () => {
         <Button>右边</Button>
       </Tooltip>
     </div>
-  )
-}
+  );
+};
 ```
 
 ### 触发方式
@@ -59,7 +59,15 @@ import { Tooltip, Button, Input } from 'IceCream-UI';
 
 export default () => {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '20px',
+        flexWrap: 'wrap',
+      }}
+    >
       <Tooltip title="鼠标移入显示" trigger="hover">
         <Button>hover</Button>
       </Tooltip>
@@ -70,19 +78,19 @@ export default () => {
         <Input>focus</Input>
       </Tooltip>
     </div>
-  )
-}
+  );
+};
 ```
 
 ## API
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| title | 提示文字 | `ReactNode` | - |
-| placement | 气泡框位置 | `top` \| `bottom` \| `left` \| `right` | `top` |
-| trigger | 触发行为 | `hover` \| `click` \| `focus` | `hover` |
-| className | 自定义类名 | `string` | - |
-| style | 自定义样式 | `CSSProperties` | - |
+| 参数      | 说明       | 类型                                   | 默认值  |
+| --------- | ---------- | -------------------------------------- | ------- |
+| title     | 提示文字   | `ReactNode`                            | -       |
+| placement | 气泡框位置 | `top` \| `bottom` \| `left` \| `right` | `top`   |
+| trigger   | 触发行为   | `hover` \| `click` \| `focus`          | `hover` |
+| className | 自定义类名 | `string`                               | -       |
+| style     | 自定义样式 | `CSSProperties`                        | -       |
 
 ## 注意事项
 
@@ -92,4 +100,4 @@ export default () => {
 4. 提示框会自动计算位置，避免超出可视区域
 5. 提示框有平滑的动画效果
 6. 支持自定义样式和类名
-7. 支持无障碍访问 
+7. 支持无障碍访问

@@ -124,7 +124,7 @@
 
 @keyframes messageSlideIn {
   from {
-    transform: translate(-50%, -20px);
+    transform: translate(-50%, -10px);
     opacity: 0;
   }
   to {
@@ -139,7 +139,7 @@
     opacity: 1;
   }
   to {
-    transform: translate(-50%, -20px);
+    transform: translate(-50%, -10px);
     opacity: 0;
   }
 }
@@ -148,24 +148,53 @@
 @media screen and (max-width: @screen-md) {
   .@{messagePrefix} {
     top: 10px;
+    left: 50%;
     max-width: 90%;
-    padding: 8px 16px;
+    padding: 12px 20px;
     font-size: 14px;
+    border-radius: @IceCream-UI-border-radius-lg;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateX(-50%);
+    touch-action: manipulation;
 
     &-content {
       font-size: 14px;
+      line-height: 1.4;
+    }
+
+    &:active {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      transform: translate(-50%, -1px);
+    }
+
+    &-success,
+    &-warning,
+    &-error,
+    &-info {
+      &:hover {
+        transform: translate(-50%, -1px);
+      }
     }
   }
 
   .@{demoPrefix} {
     &-container {
       flex-direction: column;
-      gap: 8px;
+      gap: 12px;
     }
 
     &-button {
       width: 100%;
+      height: 40px;
+      padding: 0 16px;
+      font-size: 14px;
       text-align: center;
+      border-radius: @IceCream-UI-border-radius-base;
+      touch-action: manipulation;
+
+      &:active {
+        transform: scale(0.98);
+      }
     }
   }
 }
@@ -173,12 +202,25 @@
 // 小屏幕手机适配
 @media screen and (max-width: @screen-xs) {
   .@{messagePrefix} {
+    top: 8px;
     max-width: 95%;
-    padding: 6px 12px;
-    font-size: 12px;
+    padding: 10px 16px;
+    font-size: 13px;
 
     &-content {
-      font-size: 12px;
+      font-size: 13px;
+    }
+  }
+
+  .@{demoPrefix} {
+    &-container {
+      gap: 8px;
+    }
+
+    &-button {
+      height: 36px;
+      padding: 0 12px;
+      font-size: 13px;
     }
   }
 }

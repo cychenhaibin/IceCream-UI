@@ -21,7 +21,7 @@ import { Progress } from 'IceCream-UI';
 import React from 'react';
 const Line_Base = () => {
   return (
-    <div style={{ width: '600px', margin: '0 auto' }}>
+    <div style={{ width: '100%', margin: '0 auto' }}>
       <Progress percent={30} />
     </div>
   );
@@ -39,7 +39,7 @@ import { Progress } from 'IceCream-UI';
 import React from 'react';
 const Line_Sml = () => {
   return (
-    <div style={{ width: '600px', margin: '0 auto' }}>
+    <div style={{ width: '100%', margin: '0 auto' }}>
       <Progress percent={30} size="small" />
     </div>
   );
@@ -59,7 +59,7 @@ const Line_Status = () => {
   return (
     <div
       style={{
-        width: '600px',
+        width: '100%',
         margin: '0 auto',
         display: 'grid',
         gap: '16px',
@@ -86,7 +86,7 @@ const Circle_StrokeLinecap = () => {
   return (
     <div
       style={{
-        width: '600px',
+        width: '100%',
         margin: '0 auto',
         display: 'grid',
         gridTemplateColumns: 'repeat(2, 1fr)',
@@ -110,7 +110,7 @@ import { Progress } from 'IceCream-UI';
 import React from 'react';
 const Line_Step = () => {
   return (
-    <div style={{ width: '600px', margin: '0 auto' }}>
+    <div style={{ width: '100%', margin: '0 auto' }}>
       <div>
         <Progress percent={30} steps={4} status="success" />
       </div>
@@ -137,7 +137,7 @@ const Circle_Base = () => {
   return (
     <div
       style={{
-        width: '600px',
+        width: '100%',
         margin: '0 auto',
         display: 'flex',
         justifyContent: 'center',
@@ -160,7 +160,7 @@ import { Progress } from 'IceCream-UI';
 import React from 'react';
 const Line_StrokeLinecap = () => {
   return (
-    <div style={{ width: '600px', margin: '0 auto' }}>
+    <div style={{ width: '100%', margin: '0 auto' }}>
       <Progress percent={30} strokeLinecap="butt" />
       <Progress percent={30} strokeLinecap="round" />
     </div>
@@ -181,7 +181,7 @@ const Circle_Status = () => {
   return (
     <div
       style={{
-        width: '600px',
+        width: '100%',
         margin: '0 auto',
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 0.5fr)',
