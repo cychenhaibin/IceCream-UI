@@ -30,6 +30,7 @@ IceCream-UI 是一个基于 React 的 UI 组件库，提供了一系列高质量
 - [InputTag 标签输入框](./form/input-tag)
 - [Radio 单选框](./form/radio)
 - [Rate 评分](./form/rate)
+- [Select 选择器](./form/select)
 - [Icon 图标](./general/icon)
 - 更多组件正在开发中...
 
