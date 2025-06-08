@@ -12,3 +12,4 @@ export { default as Progress } from './Data/Progress';
 export { default as Radio } from './Form/Radio';
 export { default as Checkbox } from './Form/Checkbox';
 export { default as Select } from './Form/Select';
+export { default as InputNumber } from './Form/InputNumber';
